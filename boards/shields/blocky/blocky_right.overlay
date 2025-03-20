@@ -20,13 +20,13 @@
         ;
 };
 
-&ps2_gpio {
-    status = "okay";
-};
+// &ps2_gpio {
+//     status = "okay";
+// };
 
-&ps2_input_listener {
-    status = "okay";
-};
+// &ps2_input_listener {
+//     status = "okay";
+// };
 
 /*
  * PS/2 Mouse / Trackpoint - User Configuration
