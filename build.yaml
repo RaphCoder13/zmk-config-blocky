@@ -23,4 +23,4 @@ include:
     shield: blocky_left
   - board: seeeduino_xiao_ble
     shield: blocky_right
-    snippet: zmk-usb-logging
+    # snippet: zmk-usb-logging
