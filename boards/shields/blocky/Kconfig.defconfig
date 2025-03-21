@@ -9,6 +9,11 @@ config ZMK_KEYBOARD_NAME
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
+# enable pointing device
+config ZMK_POINTING
+    default y
+
+
 endif
 
 if SHIELD_BLOCKY_LEFT
@@ -25,10 +30,5 @@ if SHIELD_BLOCKY_LEFT || SHIELD_BLOCKY_RIGHT
 
 config ZMK_SPLIT
     default y
-
-# enable pointing device
-config ZMK_POINTING
-    default y
-
 
 endif
