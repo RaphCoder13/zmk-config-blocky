@@ -575,7 +575,7 @@
 
         device = <&mouse_ps2>;
 
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
+        // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
 		// Some of the available settings depend on the keymap. So they
 		// are adjusted in...
 		// zmk-config/config/includes/mouse_tp.dtsi
