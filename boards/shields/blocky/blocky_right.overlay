@@ -571,7 +571,8 @@
         compatible = "zmk,input-listener";
         device = <&mouse_ps2>;
         // status = "disabled";
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>,<&zip_xy_scaler 0 1>;
+        // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
         // scroller {
         //     layers = <10>;
         //     //process-next;
