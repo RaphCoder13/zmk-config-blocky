@@ -571,7 +571,7 @@
         compatible = "zmk,input-listener";
         device = <&mouse_ps2>;
         // layer-toggle = <MOUSE_TP>;
-        layer-toggle = 1;
+        layer-toggle = <1>;
         // How long the mouse needs to move for before the layer is activated (to
         // avoid accidental activations while typing) (Default: 250)
         layer-toggle-delay-ms = <250>;
