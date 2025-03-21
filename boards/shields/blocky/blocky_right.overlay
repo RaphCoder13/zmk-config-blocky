@@ -537,11 +537,19 @@
 #endif
     };
 
-    // mouse_ps2_input_listener: mouse_ps2_input_listener {
-    //     compatible = "zmk,input-listener-ps2";
-    //     status = "disabled";
+    mouse_ps2_input_listener: mouse_ps2_input_listener {
+        compatible = "zmk,input-listener-ps2";
+        status = "disabled";
 
-    //     device = <&mouse_ps2>;
+        // layer-toggle = <MOUSE_TP>;
+        layer-toggle = <1>;
+        // How long the mouse needs to move for before the layer is activated (to
+        // avoid accidental activations while typing) (Default: 250)
+        layer-toggle-delay-ms = <250>;
+        // How long to wait, after the last mouse movement, before deactivating
+        // the layer (Default: 250)
+        layer-toggle-timeout-ms = <250>;
+        device = <&mouse_ps2>;
 
 		// Some of the available settings depend on the keymap. So they
 		// are adjusted in...
@@ -568,16 +576,8 @@
 
 /{
     trackpoint_listener: trackpoint_listener {
-        compatible = "zmk,input-listener-ps2";
+        compatible = "zmk,input-listener";
         device = <&mouse_ps2>;
-        // layer-toggle = <MOUSE_TP>;
-        layer-toggle = <1>;
-        // How long the mouse needs to move for before the layer is activated (to
-        // avoid accidental activations while typing) (Default: 250)
-        layer-toggle-delay-ms = <250>;
-        // How long to wait, after the last mouse movement, before deactivating
-        // the layer (Default: 250)
-        layer-toggle-timeout-ms = <250>;
 
         // status = "disabled";
         // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
