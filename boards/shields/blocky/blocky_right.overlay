@@ -12,7 +12,7 @@
 
 &kscan0 {
     col-gpios
-        = <&xiao_d 6 GPIO_ACTIVE_HIGH>
+        = <&xiao_d 7 GPIO_ACTIVE_HIGH>
         , <&xiao_d 8 GPIO_ACTIVE_HIGH>
         , <&xiao_d 9 GPIO_ACTIVE_HIGH>
         , <&xiao_d 10 GPIO_ACTIVE_HIGH>
@@ -95,7 +95,7 @@
 // trackpoint reset circuit.
 //
 // It's ok to use a low-frequency pin for this.
-#define MOUSE_PS2_PIN_RST_PRO_MICRO <&xiao_d 7 GPIO_ACTIVE_HIGH>
+#define MOUSE_PS2_PIN_RST_PRO_MICRO <&xiao_d 6 GPIO_ACTIVE_HIGH>
 
 
 // Configure SDA pin using the pinctrl notation
@@ -570,6 +570,14 @@
     trackpoint_listener: trackpoint_listener {
         compatible = "zmk,input-listener";
         device = <&mouse_ps2>;
+        layer-toggle = <MOUSE_TP>;
+        // How long the mouse needs to move for before the layer is activated (to
+        // avoid accidental activations while typing) (Default: 250)
+        layer-toggle-delay-ms = <250>;
+        // How long to wait, after the last mouse movement, before deactivating
+        // the layer (Default: 250)
+        layer-toggle-timeout-ms = <250>;
+
         // status = "disabled";
         // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
         input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
