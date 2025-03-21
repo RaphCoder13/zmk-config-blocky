@@ -538,16 +538,16 @@
     };
 
 
-    mouse_ps2_input_listener: mouse_ps2_input_listener {
-        compatible = "zmk,input-listener-ps2";
-        // status = "disabled";
+    // mouse_ps2_input_listener: mouse_ps2_input_listener {
+    //     compatible = "zmk,input-listener-ps2";
+    //     // status = "disabled";
 
-        device = <&mouse_ps2>;
+    //     device = <&mouse_ps2>;
 
-		// Some of the available settings depend on the keymap. So they
-		// are adjusted in...
-		// zmk-config/config/includes/mouse_tp.dtsi
-    };
+	// 	// Some of the available settings depend on the keymap. So they
+	// 	// are adjusted in...
+	// 	// zmk-config/config/includes/mouse_tp.dtsi
+    // };
 };
 
 &uart0 {
@@ -575,7 +575,7 @@
 
         // status = "disabled";
         // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_temp_layer MOUSE_TP 1000>;
         // scroller {
         //     layers = <10>;
         //     //process-next;
