@@ -575,7 +575,7 @@
 
         // status = "disabled";
         // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP)>;
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_temp_layer MOUSE_TP 1000>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>, <&zip_temp_layer 1 1000>;
         // scroller {
         //     layers = <10>;
         //     //process-next;
