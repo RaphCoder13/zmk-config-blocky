@@ -568,7 +568,7 @@
 
 /{
     trackpoint_listener: trackpoint_listener {
-        compatible = "zmk,input-listener";
+        compatible = "zmk,input-listener-ps2";
         device = <&mouse_ps2>;
         // layer-toggle = <MOUSE_TP>;
         layer-toggle = <1>;
