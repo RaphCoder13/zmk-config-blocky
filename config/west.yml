@@ -24,8 +24,10 @@ manifest:
     #   remote: infused-kim
     #   revision: pr-testing/mouse_ps2_module_base
     #   import: app/west.yml
-    - name: zmk-keyboards-blocky
+    # - name: zmk-keyboards-blocky
+    - name: blocky-zmk-module
       remote: raphcoder13
+      revision: main
 
     - name: kb_zmk_ps2_mouse_trackpoint_driver
       remote: badjeff
