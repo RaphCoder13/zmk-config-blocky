@@ -14,6 +14,10 @@ manifest:
       url-base: https://github.com/badjeff
     - name: raphcoder13
       url-base: https://github.com/RaphCoder13
+    - name: caksoylar
+      url-base: https://github.com/caksoylar
+    - name: joelspadin
+      url-base: https://github.com/joelspadin
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -31,6 +35,12 @@ manifest:
 
     - name: kb_zmk_ps2_mouse_trackpoint_driver
       remote: badjeff
+      revision: main
+    - name: zmk-rgbled-widget
+      remote: caksoylar
+      revision: main
+    - name: zmk-locales
+      remote: joelspadin
       revision: main
 self:
     path: config
