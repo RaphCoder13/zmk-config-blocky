@@ -38,6 +38,15 @@
 };
 
 / {
+    aliases {
+        led-red = &led0;
+        led-green = &led1;
+        led-blue = &led2;
+    };
+
+    leds {
+        status = "okay";
+    };
     // combos {
     //         compatible = "zmk,combos";
     //         combo_esc {
@@ -81,7 +90,7 @@ label= "BASE"                              ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp FR_W       &kp F       &kp P       &kp G                    &kp J       &kp L       &kp U       &kp Y
+                &kp FR_W       &kp F       &kp P       &kp G                    &kp J       &ind_con       &bt BT_CLR_ALL   &out  OUT_TOG
                 &mt LALT R  &mt LCTRL S &mt LSHFT T &kp D                    &kp FR_M    &mt RSHFT N &mt RCTRL E &mt RALT I
     &kp FR_Z       &kp X       &kp C       &kp V       &bt BT_CLR_ALL           &kp K       &kp H       &kp COMMA   &kp DOT    &kp FSLH
                             &kp TAB     &kp TAB     &kp SPACE                &kp RET     &kp BSPC    &kp BSPC

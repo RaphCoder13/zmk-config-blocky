@@ -29,18 +29,18 @@ manifest:
     #   revision: pr-testing/mouse_ps2_module_base
     #   import: app/west.yml
     # - name: blocky-zmk-module
-    - name: zmk-keyboards-blocky
-      remote: raphcoder13
-      revision: main
-
     - name: kb_zmk_ps2_mouse_trackpoint_driver
       remote: badjeff
-      revision: main
-    - name: zmk-rgbled-widget
-      remote: caksoylar
       revision: main
     - name: zmk-locales
       remote: joelspadin
       revision: main
+    - name: zmk-rgbled-widget
+      remote: caksoylar
+      revision: main
+    - name: zmk-keyboards-blocky
+      remote: raphcoder13
+      revision: main
+
 self:
     path: config
