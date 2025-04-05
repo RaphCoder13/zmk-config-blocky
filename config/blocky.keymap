@@ -16,7 +16,7 @@
 #define SYM 2
 #define NUMS 3
 #define NAV 4
-#define FUNCTION 5
+#define FUNCTION_L 5
 #define APPS 6
 #define MOUSE_TP 7
 #define EXCEL 8
@@ -476,4 +476,4 @@ bindings = <
     //             &mt LALT R  &mt LCTRL S &mt LSHFT T &kp D                    &kp FR_M    &mt RSHFT N &mt RCTRL E &mt RALT I
     // &kp FR_Z       &kp X       &kp C       &kp V       &bt BT_CLR_ALL           &kp K       &kp H       &kp COMMA   &kp DOT    &kp FSLH
     //                         &kp TAB     &kp TAB     &kp SPACE                &kp RET     &kp BSPC    &kp BSPC
-}
+};
