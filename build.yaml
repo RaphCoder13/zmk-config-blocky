@@ -24,3 +24,4 @@ include:
   - board: seeeduino_xiao_ble
     shield: blocky_right rgbled_adapter
     snippet: zmk-usb-logging
+    cmake-args: -DCONFIG_ZMK_USB_LOGGING=y -DCONFIG_NFCT_PINS_AS_GPIOS=y
