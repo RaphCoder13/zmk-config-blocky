@@ -304,9 +304,9 @@ display-name= "BASE"                              ;
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
 //             ┃     Q       ┃     Z       ┃     F       ┃     P       ┃     B       ┃   ┃     J       ┃     L       ┃     O       ┃   dead      ┃     Y       ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃     A       ┃     R       ┃     S       ┃     T       ┃     G       ┃   ┃     M       ┃     N       ┃     E       ┃     I       ┃     U       ┃   / :     ┃
+// ┃  LSHFT    ┃     A       ┃     R       ┃     S       ┃     T       ┃     G       ┃   ┃     M       ┃     N       ┃     E       ┃     I       ┃     U       ┃   - ?     ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃     W       ┃     X       ┃     C       ┃     D       ┃     V       ┃   ┃     K       ┃     H       ┃    - ?      ┃    , ;      ┃    . _      ┃  swap     ┃
+// ┃  swap     ┃     W       ┃     X       ┃     C       ┃     D       ┃     V       ┃   ┃     K       ┃     H       ┃    , ;      ┃    . _      ┃    / :      ┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                         ┃    ESC      ┃    SPC      ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
 //                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
@@ -314,8 +314,8 @@ display-name= "BASE"                              ;
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &kp FR_Q      &kp FR_Z      &kp F         &kp P         &kp B             &kp J         &kp L         &kp O         &sl ACCENT    &kp FR_Y
-&td_shft_capw   &mt LGUI FR_A &mt LALT R    &mt LSHFT S   &mt LCTRL T   &kp G             &kp FR_M      &mt RCTRL N   &mt RSHFT E   &mt LALT I    &mt RGUI U    &slash_colon
-    &sl_togBaseM  &kp FR_W      &kp X         &kp C         &mt RALT D    &kp V             &kp K         &mt RALT H    &minus_qmark  &comma_semi   &dot_under    &sl_togBaseM
+&td_shft_capw   &mt LGUI FR_A &mt LALT R    &mt LSHFT S   &mt LCTRL T   &kp G             &kp FR_M      &mt RCTRL N   &mt RSHFT E   &mt LALT I    &mt RGUI U    &minus_qmark
+  &sl_togBaseM  &kp FR_W      &kp X         &kp C         &mt RALT D    &kp V             &kp K         &mt RALT H    &comma_semi   &dot_under    &slash_colon  &sl_togBaseM
                                 &lt APPS ESC       &lt NUMS SPACE     &lt NAV TAB        &lt EXCEL RET       &lt SYM BSPC      &lt FUNCTION_L DEL
             >;
     };
@@ -386,20 +386,20 @@ bindings = <
 navigation_layer {
 display-name= "NAVIGATION";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃   ctrl+A    ┃   ctrl+X    ┃   ctrl+C    ┃   ctrl+V    ┃ vim syst cli┃   ┃   Insert    ┃    Home     ┃     Up      ┃    End      ┃  Page Up    ┃
+//             ┃   ctrl+A    ┃   ctrl+X    ┃   ctrl+C    ┃   ctrl+V    ┃ vim syst cli┃   ┃   Insert    ┃    Home     ┃    End      ┃             ┃             ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃ osm LGUI    ┃  osm LALT   ┃  osm LSHFT  ┃  osm LCTRL  ┃   ctrl+Z    ┃   ┃ Print Screen┃   Left      ┃   Down      ┃   Right     ┃  Page Down  ┃           ┃
+// ┃  LSHFT    ┃ osm LGUI    ┃  osm LALT   ┃  osm LSHFT  ┃  osm LCTRL  ┃   ctrl+Z    ┃   ┃ Print Screen┃    Left     ┃    Down     ┃     Up      ┃    Right    ┃           ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃ vim last Y  ┃  alt+F4     ┃ alt+ctrl+gui┃  osm RALT   ┃   ctrl+Y    ┃   ┃   Pause     ┃  Ctrl+Left  ┃  Ctrl+Up    ┃  Ctrl+Right ┃  Context Men┃  swap     ┃
+// ┃  swap     ┃ vim last Y  ┃  alt+F4     ┃ alt+ctrl+gui┃  osm RALT   ┃   ctrl+Y    ┃   ┃   Pause     ┃   Page Up   ┃   Page Down ┃             ┃  Context Men┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                         ┃    ESC      ┃    SPC      ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
 //                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-                &kp LC(FR_A)  &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)  &vim_syst_clip    &kp INS       &kp HOME      &kp UP        &kp END       &kp PG_UP
-    &trans      &sk LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(FR_Z)      &kp PSCRN     &kp LEFT      &kp DOWN      &kp RIGHT     &kp PG_DN     &none
-    &trans      &vim_last_yank &kp LA(F4)   &kp LA(LC(LGUI)) &sk RALT   &kp LC(FR_Y)      &kp PAUSE_BREAK &kp LC(LEFT) &kp LC(UP)   &kp LC(RIGHT) &kp K_APP     &trans
+                &kp LC(FR_A)  &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)  &vim_syst_clip    &kp INS       &kp HOME      &kp END       &none         &none
+    &trans      &sk LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(FR_Z)      &kp PSCRN     &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     &none
+    &trans      &vim_last_yank &kp LA(F4)   &kp LA(LC(LGUI)) &sk RALT   &kp LC(FR_Y)      &kp PAUSE_BREAK &kp PG_UP   &kp PG_DN     &none         &kp K_APP     &trans
                                             &trans        &trans        &trans            &trans        &trans        &trans
         >;
     };
