@@ -181,7 +181,8 @@
             #binding-cells = <0>;
             bindings = <&sk LSHFT>;
 
-            akt_shft {trigger-keys = <LSHFT>; bindings = <&end_camel>;};
+            akt_shft {trigger-keys = <LSHFT>; bindings = <&sk LSHFT>;};
+            // akt_shft {trigger-keys = <LSHFT>; bindings = <&end_camel>;};
         };
 
         ak_snake: ak_snake {
@@ -189,8 +190,8 @@
             #binding-cells = <0>;
             bindings = <&kp FR_UNDER>;
 
-            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
-            akt_under {trigger-keys = <FR_UNDER>; bindings = <&end_snake>;};
+            akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
+            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&end_snake>;};
         };
     };
 };

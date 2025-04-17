@@ -38,7 +38,7 @@ manifest:
     - name: zmk-rgbled-widget
       remote: caksoylar
       revision: main
-    - name: zmk-keyboards-blocky/blocky_keyboard
+    - name: zmk-keyboard-blocky
       remote: raphcoder13
       revision: main
     - name: zmk-helpers
