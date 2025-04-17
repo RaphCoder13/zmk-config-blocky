@@ -72,7 +72,7 @@
 
 // #ifdef HAS_MOUSE_TP
 &trackpoint_listener {
-    input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,<&zip_temp_layer MOUSE_TP 1000>;
+    input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_temp_layer MOUSE_TP 1000>;
     // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,<&zip_temp_layer MOUSE_TP 1000>;
     scroller {
         layers = <MOUSE_SCR>;
@@ -158,14 +158,14 @@
     ZMK_COMBO(mo_mouse,  &mo MOUSE_TP,   LM5 LB5)
 
     // Leader sequences
-    // ZMK_MACRO(macro_first_name, bindings=<&kp R>;)
-    // ZMK_MACRO(macro_last_name, bindings=<&kp R>;)
+    ZMK_MACRO(macro_first_name, bindings=<&kp R>;)
+    ZMK_MACRO(macro_last_name, bindings=<&kp R>;)
     // [redacted]
-    // ZMK_MACRO(macro_tel, bindings=<&kp R>;)
+    ZMK_MACRO(macro_tel, bindings=<&kp R>;)
 
     ZMK_LEADER_SEQUENCE(first_name,    &macro_first_name, R P)
-    // ZMK_LEADER_SEQUENCE(last_name,   &macro_last_name, R D)
-    // ZMK_LEADER_SEQUENCE(telephone,  &macro_tel, R T)
+    ZMK_LEADER_SEQUENCE(last_name,   &macro_last_name, R D)
+    ZMK_LEADER_SEQUENCE(telephone,  &macro_tel, R T)
 
 
     // Snake case with urob's zmk-auto-layer
@@ -429,32 +429,32 @@
     // };
 
     macros {
-        macro_first_name: macro_first_name {
-            compatible = "zmk,behavior-macro";
-            label = "Raphael";
-            #binding-cells = <0>;
-            wait-ms = <100>;
-            tap-ms = <100>;
-            bindings = <&macro_tap &kp R &kp A &kp P &kp H &kp A &kp E &kp L>;
-        };
+        // macro_first_name: macro_first_name {
+        //     compatible = "zmk,behavior-macro";
+        //     label = "Raphael";
+        //     #binding-cells = <0>;
+        //     wait-ms = <100>;
+        //     tap-ms = <100>;
+        //     bindings = <&macro_tap &kp R &kp A &kp P &kp H &kp A &kp E &kp L>;
+        // };
 
-        macro_last_name: macro_last_name {
-            compatible = "zmk,behavior-macro";
-            label = "Debeugny";
-            #binding-cells = <0>;
-            wait-ms = <100>;
-            tap-ms = <100>;
-            bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp FR_D>, <&kp FR_E>, <&kp FR_B>, <&kp FR_E>, <&kp FR_U>, <&kp FR_G>, <&kp FR_N>, <&kp FR_Y>, <&macro_release &kp LSHFT>;
-        };
+        // macro_last_name: macro_last_name {
+        //     compatible = "zmk,behavior-macro";
+        //     label = "Debeugny";
+        //     #binding-cells = <0>;
+        //     wait-ms = <100>;
+        //     tap-ms = <100>;
+        //     bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp FR_D>, <&kp FR_E>, <&kp FR_B>, <&kp FR_E>, <&kp FR_U>, <&kp FR_G>, <&kp FR_N>, <&kp FR_Y>, <&macro_release &kp LSHFT>;
+        // };
 
-        macro_tel: macro_tel {
-            compatible = "zmk,behavior-macro";
-            label = "Tel";
-            #binding-cells = <0>;
-            wait-ms = <100>;
-            tap-ms = <100>;
-            bindings = <&kp FR_N0>, <&kp FR_N6>, <&kp FR_N1>, <&kp FR_N2>, <&kp FR_N4>, <&kp FR_N3>, <&kp FR_N1>, <&kp FR_N9>, <&kp FR_N9>, <&kp FR_N4>;
-        };
+        // macro_tel: macro_tel {
+        //     compatible = "zmk,behavior-macro";
+        //     label = "Tel";
+        //     #binding-cells = <0>;
+        //     wait-ms = <100>;
+        //     tap-ms = <100>;
+        //     bindings = <&kp FR_N0>, <&kp FR_N6>, <&kp FR_N1>, <&kp FR_N2>, <&kp FR_N4>, <&kp FR_N3>, <&kp FR_N1>, <&kp FR_N9>, <&kp FR_N9>, <&kp FR_N4>;
+        // };
 
         qu_macro: qu_macro {
             display-name = "qu";
