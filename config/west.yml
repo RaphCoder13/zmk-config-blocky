@@ -20,8 +20,8 @@ manifest:
       url-base: https://github.com/joelspadin
   projects:
     - name: zmk
-      remote: urob
-      revision: v0.2+fix-child-nodes
+      remote: zmkfirmware
+      revision: main
       import: app/west.yml
 
     # - name: zmk
@@ -29,6 +29,30 @@ manifest:
     #   revision: pr-testing/mouse_ps2_module_base
     #   import: app/west.yml
     # - name: blocky-zmk-module
+    - name: zephyr
+      remote: urob
+      revision: v3.5.0+zmk-fixes
+      clone-depth: 1
+      import:
+        name-blocklist:
+          - ci-tools
+          - hal_altera
+          - hal_cypress
+          - hal_infineon
+          - hal_microchip
+          - hal_nxp
+          - hal_openisa
+          - hal_silabs
+          - hal_xtensa
+          - hal_st
+          - hal_ti
+          - loramac-node
+          - mcuboot
+          - mcumgr
+          - net-tools
+          - openthread
+          - edtt
+          - trusted-firmware-m
     - name: kb_zmk_ps2_mouse_trackpoint_driver
       remote: badjeff
       revision: main

@@ -163,14 +163,14 @@
     // [redacted]
     // ZMK_MACRO(macro_tel, bindings=<&kp R>;)
 
-    // ZMK_LEADER_SEQUENCE(first_name,    &macro_first_name, R P)
+    ZMK_LEADER_SEQUENCE(first_name,    &macro_first_name, R P)
     // ZMK_LEADER_SEQUENCE(last_name,   &macro_last_name, R D)
     // ZMK_LEADER_SEQUENCE(telephone,  &macro_tel, R T)
 
 
     // Snake case with urob's zmk-auto-layer
     ZMK_AUTO_LAYER(case_mod, ignore-alphas; ignore-numbers; ignore-modifiers;continue-list=<SPACE FR_UNDER FR_MINUS DEL BSPC LEFT RIGHT>;)
-    ZMK_MACRO(end_snake, bindings=<&kp BSPC &to BASE &kp SPACE>;)
+    ZMK_MACRO(end_snake, bindings=<&kp BSPC &kp SPACE>;)
     ZMK_MACRO(end_camel, bindings=<&to BASE &kp SPACE>;)
 
     // ZMK_ADAPTIVE_KEY(camel, bindings=<LSHFT>; )
@@ -680,7 +680,7 @@ display-name= "APPS";
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃  LSHFT    ┃   LGUI      ┃    LALT     ┃   LSHIFT    ┃   LCTRL     ┃   td_reset  ┃   ┃ Context Menu┃   browser   ┃             ┃ Sh+Alt+Ctl+T┃             ┃    /      ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃  out USB    ┃ out BLE     ┃             ┃   RALT      ┃             ┃   ┃ Sh+Alt+Ctl+K┃  Ctrl+Alt+F ┃   Calc      ┃ Sh+Gui+S    ┃             ┃  swap     ┃
+// ┃  swap     ┃  out USB    ┃ out BLE     ┃    leader   ┃   RALT      ┃             ┃   ┃ Sh+Alt+Ctl+K┃  Ctrl+Alt+F ┃   Calc      ┃ Sh+Gui+S    ┃             ┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                         ┃    ESC      ┃    SPC      ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
 //                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
@@ -690,7 +690,7 @@ bindings = <
 
                 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR        &td_reset     &kp LA(L)     &kp LC(FR_SQUARE)  XXX       XXX
      ___        &kp LGUI      &kp LALT      &kp LSHIFT    &kp LCTRL     &td_reset         &kp K_APP     &kp K_WWW      XXX          &kp LS(LA(LC(T)))  XXX       ___
-     ___        &out OUT_USB  &out OUT_BLE   XXX          &kp RALT       XXX              &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp K_CALC   XXX           XXX           ___
+     ___        &out OUT_USB  &out OUT_BLE  &leader       &kp RALT       XXX              &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp K_CALC   XXX           XXX           ___
                                              ___           ___           ___               ___           ___           ___
                         >;
                 };
@@ -779,7 +779,7 @@ bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___      &lt EXCEL &ak_snake ___              ___         ___           ___
+                                             ___          &ak_snake      ___              ___         ___           ___
                         >;
                 };
 
