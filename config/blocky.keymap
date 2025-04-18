@@ -32,6 +32,10 @@
 #define EXCEL 11
 #define SNAKE 12
 #define CAMEL 13
+#define KEBAB 14
+#define PATH_CASE 15
+#define SLSH_CASE 16
+
 
 #define HAS_MOUSE_KEYS
 // #define HAS_MOUSE_TP
@@ -71,8 +75,17 @@
     };
 
 // #ifdef HAS_MOUSE_TP
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+/ {
+    zip_temp_layer: zip_temp_layer {
+        compatible = "zmk,input-processor-temp-layer";
+        #input-processor-cells = <2>;
+        require-prior-idle-ms = <1000>;
+    };
+};
 &trackpoint_listener {
-    input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_temp_layer MOUSE_TP 1000>;
+    input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_temp_layer MOUSE_TP 1000 >;
     // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,<&zip_temp_layer MOUSE_TP 1000>;
     scroller {
         layers = <MOUSE_SCR>;
@@ -80,6 +93,8 @@
     };
 };
 // #endif
+#undef COMBO_TERM
+#define COMBO_TERM 60
 
 &mt {
   quick-tap-ms = <100>;
@@ -166,12 +181,25 @@
     ZMK_LEADER_SEQUENCE(first_name,    &macro_first_name, R P)
     ZMK_LEADER_SEQUENCE(last_name,   &macro_last_name, R D)
     ZMK_LEADER_SEQUENCE(telephone,  &macro_tel, R T)
+    // Case mods
+    ZMK_LEADER_SEQUENCE(snake_mod,  &case_mod SNAKE, S)
+    ZMK_LEADER_SEQUENCE(camel_mod,  &case_mod CAMEL, C)
+    ZMK_LEADER_SEQUENCE(kebab_mod,  &case_mod KEBAB, K)
+    ZMK_LEADER_SEQUENCE(path_mod,  &case_mod PATH_CASE, FR_D)
+    ZMK_LEADER_SEQUENCE(slsh_mod,  &case_mod SLSH_CASE, FR_V)
+    ZMK_LEADER_SEQUENCE(pascal_mod, &pascal_case, P)
+    ZMK_LEADER_SEQUENCE(constant_mod, &constant_case, T)
+
+
 
 
     // Snake case with urob's zmk-auto-layer
-    ZMK_AUTO_LAYER(case_mod, ignore-alphas; ignore-numbers; ignore-modifiers;continue-list=<SPACE FR_UNDER FR_MINUS DEL BSPC LEFT RIGHT>;)
-    ZMK_MACRO(end_snake, bindings=<&kp BSPC &kp SPACE>;)
+    ZMK_AUTO_LAYER(case_mod, ignore-alphas; ignore-numbers; ignore-modifiers;continue-list=<SPACE FR_UNDER FR_MINUS DEL BSPC LEFT RIGHT FR_BSLH FR_SLASH>;)
+    ZMK_MACRO(end_sep_mod, bindings=<&kp BSPC &kp SPACE>;)
     ZMK_MACRO(end_camel, bindings=<&to BASE &kp SPACE>;)
+    ZMK_MACRO(pascal_case, bindings=<&macro_tap &sk LSHFT>, <&case_mod CAMEL>;)
+    ZMK_MACRO(constant_case, bindings=<&caps_word>, <&case_mod SNAKE>;)
+
 
     // ZMK_ADAPTIVE_KEY(camel, bindings=<LSHFT>; )
 / {
@@ -191,7 +219,34 @@
             bindings = <&kp FR_UNDER>;
 
             // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
-            akt_under {trigger-keys = <FR_UNDER>; bindings = <&end_snake>;};
+            akt_under {trigger-keys = <FR_UNDER>; bindings = <&end_sep_mod>;};
+        };
+
+        ak_kebab: ak_kebab {
+            compatible = "zmk,behavior-adaptive-key";
+            #binding-cells = <0>;
+            bindings = <&kp FR_MINUS>;
+
+            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
+            akt_kebab {trigger-keys = <FR_MINUS>; bindings = <&end_sep_mod>;};
+        };
+
+        ak_bslh: ak_bslh {
+            compatible = "zmk,behavior-adaptive-key";
+            #binding-cells = <0>;
+            bindings = <&kp FR_BSLH>;
+
+            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
+            akt_bslh {trigger-keys = <FR_BSLH>; bindings = <&end_sep_mod>;};
+        };
+
+        ak_slash: ak_slash {
+            compatible = "zmk,behavior-adaptive-key";
+            #binding-cells = <0>;
+            bindings = <&kp FR_SLASH>;
+
+            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
+            akt_slash {trigger-keys = <FR_SLASH>; bindings = <&end_sep_mod>;};
         };
     };
 };
@@ -215,50 +270,6 @@
             label = "Toggle Layer Off";
             toggle-mode = "off";
         };
-
-        // Base layer mod-morphs
-        // minus_qmark: minus_qmark {
-        //     display-name = "MM - ?";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_MINUS>, <&kp FR_QUESTION>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // comma_semi: comma_semi {
-        //     display-name = "MM , ;";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_COMMA>, <&kp FR_SEMICOLON>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // dot_colon: dot_colon {
-        //     display-name = "MM . :";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_DOT>, <&kp FR_COLON>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // dot_under: dot_under {
-        //     display-name = "MM . _";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_DOT>, <&kp FR_UNDER>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // under_qmark: under_qmark {
-        //     display-name = "MM _ ?";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_UNDER>, <&kp FR_QUESTION>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // slash_colon: slash_colon {
-        //     display-name = "MM / :";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_SLASH>, <&kp FR_COLON>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
 
 
         // Symbol mod-morphs
@@ -418,43 +429,8 @@
     };
 
 
-    // combos {
-    //         compatible = "zmk,combos";
-    //         combo_esc {
-    //             timeout-ms = <50>;
-    //             key-positions = <0 1>;
-    //             bindings = <&qu_macro>;
-    //             // bindings = <&kp FR_Q>, <&kp FR_U>;
-    //         };
-    // };
 
     macros {
-        // macro_first_name: macro_first_name {
-        //     compatible = "zmk,behavior-macro";
-        //     label = "Raphael";
-        //     #binding-cells = <0>;
-        //     wait-ms = <100>;
-        //     tap-ms = <100>;
-        //     bindings = <&macro_tap &kp R &kp A &kp P &kp H &kp A &kp E &kp L>;
-        // };
-
-        // macro_last_name: macro_last_name {
-        //     compatible = "zmk,behavior-macro";
-        //     label = "Debeugny";
-        //     #binding-cells = <0>;
-        //     wait-ms = <100>;
-        //     tap-ms = <100>;
-        //     bindings = <&macro_press &kp LSHFT>, <&macro_tap &kp FR_D>, <&kp FR_E>, <&kp FR_B>, <&kp FR_E>, <&kp FR_U>, <&kp FR_G>, <&kp FR_N>, <&kp FR_Y>, <&macro_release &kp LSHFT>;
-        // };
-
-        // macro_tel: macro_tel {
-        //     compatible = "zmk,behavior-macro";
-        //     label = "Tel";
-        //     #binding-cells = <0>;
-        //     wait-ms = <100>;
-        //     tap-ms = <100>;
-        //     bindings = <&kp FR_N0>, <&kp FR_N6>, <&kp FR_N1>, <&kp FR_N2>, <&kp FR_N4>, <&kp FR_N3>, <&kp FR_N1>, <&kp FR_N9>, <&kp FR_N9>, <&kp FR_N4>;
-        // };
 
         qu_macro: qu_macro {
             display-name = "qu";
@@ -483,17 +459,7 @@
                 ;
         };
 
-        gif: gif {
-            display-name = "giphy";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp N2>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp G &kp I &kp F>
-                ;
-        };
+
     };
 
         keymap {
@@ -576,7 +542,7 @@ display-name= "SYMBOL";
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
 // ┃  swap     ┃     ^       ┃     &       ┃     *       ┃     \       ┃     $       ┃   ┃     '       ┃     {       ┃     }       ┃  osm RALT   ┃             ┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃    ESC      ┃    SPC      ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
+//                                         ┃    ESC      ┃    leader   ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
 //                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
@@ -584,7 +550,7 @@ bindings = <
                 &at_mu        &pct_minus    &lt_apos      &gt_grave     &sqt_dqt          &kp FR_DQT    &kp FR_LBKT   &kp FR_RBKT   &case_mod CAMEL &case_mod SNAKE
      ___        &hash_tilde   &excl_sqr     &lpar_rpar    &rpar_dqt     &equal_plus       &kp FR_GRAVE  &sk RCTRL     &td_shft_capw &sk LALT      &sk RGUI       ___
      ___        &kp FR_CARET  &and_pipe     &aster_fslh   &bslh_deg     &doll_pnd         &kp FR_SQT    &kp FR_LBRC   &kp FR_RBRC   &sk RALT       XXX           ___
-                                             ___           ___           ___               ___           ___           ___
+                                             ___          &leader        ___               ___           ___           ___
         >;
     };
 
@@ -680,7 +646,7 @@ display-name= "APPS";
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃  LSHFT    ┃   LGUI      ┃    LALT     ┃   LSHIFT    ┃   LCTRL     ┃   td_reset  ┃   ┃ Context Menu┃   browser   ┃             ┃ Sh+Alt+Ctl+T┃             ┃    /      ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃  out USB    ┃ out BLE     ┃    leader   ┃   RALT      ┃             ┃   ┃ Sh+Alt+Ctl+K┃  Ctrl+Alt+F ┃   Calc      ┃ Sh+Gui+S    ┃             ┃  swap     ┃
+// ┃  swap     ┃  out USB    ┃ out BLE     ┃             ┃   RALT      ┃             ┃   ┃ Sh+Alt+Ctl+K┃  Ctrl+Alt+F ┃   Calc      ┃ Sh+Gui+S    ┃             ┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                         ┃    ESC      ┃    SPC      ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
 //                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
@@ -689,8 +655,8 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR        &td_reset     &kp LA(L)     &kp LC(FR_SQUARE)  XXX       XXX
-     ___        &kp LGUI      &kp LALT      &kp LSHIFT    &kp LCTRL     &td_reset         &kp K_APP     &kp K_WWW      XXX          &kp LS(LA(LC(T)))  XXX       ___
-     ___        &out OUT_USB  &out OUT_BLE  &leader       &kp RALT       XXX              &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp K_CALC   XXX           XXX           ___
+     ___        &kp LGUI      &kp LALT      &kp LSHIFT    &kp LCTRL     &td_reset         &kp K_APP     &kp C_AL_WWW  XXX          &kp LS(LA(LC(T)))  XXX       ___
+     ___        &out OUT_USB  &out OUT_BLE   XXX          &kp RALT       XXX              &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp C_AL_CALC XXX           XXX           ___
                                              ___           ___           ___               ___           ___           ___
                         >;
                 };
@@ -779,7 +745,7 @@ bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___          &ak_snake      ___              ___         ___           ___
+                                             ___     &ak_snake ___              ___         ___           ___
                         >;
                 };
 
@@ -801,7 +767,72 @@ bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___          &ak_camel     ___               ___         ___           ___
+                                             ___     &ak_camel ___               ___         ___           ___
+                        >;
+                };
+
+kebab_layer {
+display-name= "KEBAB";
+//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
+// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
+// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
+//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+bindings = <
+
+// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
+
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___      &ak_kebab  ___             ___         ___           ___
+                        >;
+                };
+
+path_layer {
+display-name= "PATH_CASE";
+//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
+// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
+// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
+//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+bindings = <
+
+// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
+
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___      &ak_bslh  ___             ___         ___           ___
+                        >;
+                };
+slsh_layer {
+display-name= "SLSH_CASE";
+//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
+// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
+// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
+//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+bindings = <
+
+// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
+
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___      &ak_slash ___             ___         ___           ___
                         >;
                 };
        };
