@@ -13,6 +13,7 @@
 #include "blocky_keys.h"
 #include <locale/keys_fr.h>
 #include <behaviors/rgbled_widget.dtsi>
+#include <behaviors/num_word.dtsi>
 
 
 #define XXX &none
@@ -96,6 +97,28 @@
 #undef COMBO_TERM
 #define COMBO_TERM 60
 
+&caps_word {
+    continue-list = <FR_UNDER DEL BSPC FR_M>;
+};
+
+&sk {
+    quick-release;
+};
+
+/ {
+    behaviors {
+        skl: sticky_key_lazy {
+            compatible = "zmk,behavior-sticky-key";
+            #binding-cells = <1>;
+            bindings = <&kp>;
+            release-after-ms = <1000>;
+            lazy;
+            quick-release;
+            ignore-modifiers;
+        };
+    };
+};
+
 &mt {
   quick-tap-ms = <100>;
   // global-quick-tap;
@@ -133,6 +156,8 @@
     ZMK_MOD_MORPH(comma_semi, bindings = <&kp FR_COMMA>, <&kp FR_SEMICOLON>; mods = <(MOD_LSFT|MOD_RSFT)>;)
     ZMK_MOD_MORPH(dot_colon, bindings = <&kp FR_DOT>, <&kp FR_COLON>; mods = <(MOD_LSFT|MOD_RSFT)>;)
     ZMK_MOD_MORPH(under_qmark, bindings = <&kp FR_UNDERSCORE>, <&kp FR_QUESTION>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+    // Test pour caps_word pour FR_M
+    ZMK_MOD_MORPH(m_supM, bindings = <&kp FR_M>, <&kp FR_M>; mods = <(MOD_LSFT|MOD_RSFT)>; )
 
     // Symbols mod_morphs
     ZMK_MOD_MORPH(at_mu, bindings = <&kp FR_AT>, <&kp FR_MICRO>; mods = <(MOD_LSFT|MOD_RSFT)>; )
@@ -155,6 +180,7 @@
     ZMK_MOD_MORPH(doll_pnd, bindings = <&kp FR_DOLLAR>, <&kp FR_POUND_SIGN>; mods = <(MOD_LSFT|MOD_RSFT)>; )
     ZMK_MOD_MORPH(kp_l_r_par, bindings = <&kp FR_LPAR>, <&kp FR_RPAR>; mods = <(MOD_LSFT|MOD_RSFT)>; )
 
+
     // Reset and Bootloader
     ZMK_MOD_MORPH(reset_booloader, bindings=<&sys_reset>, <&bootloader>; mods = <(MOD_LSFT|MOD_RSFT)>;)
     ZMK_TAP_DANCE(td_reset, bindings=<&none>, <&none>, <&reset_booloader>;)
@@ -171,6 +197,12 @@
 
     // Mouse layer access
     ZMK_COMBO(mo_mouse,  &mo MOUSE_TP,   LM5 LB5)
+
+    // Locking num layer with toggle
+    ZMK_TAP_DANCE(lock_num, bindings=<&to NUMS>, <&tog NUMS>;tapping-term-ms=<300>;)
+    ZMK_COMBO(tog_num,    &lock_num,     RM5 RB5, NUMS)
+    ZMK_TAP_DANCE(lock_nav, bindings=<&to NAV>, <&tog NAV>;tapping-term-ms=<300>;)
+    ZMK_COMBO(tog_nav,    &lock_nav,     RM5 RB5, NAV)
 
     // Leader sequences
     ZMK_MACRO(macro_first_name, bindings=<&kp R>;)
@@ -189,14 +221,26 @@
     ZMK_LEADER_SEQUENCE(slsh_mod,  &case_mod SLSH_CASE, FR_V)
     ZMK_LEADER_SEQUENCE(pascal_mod, &pascal_case, P)
     ZMK_LEADER_SEQUENCE(constant_mod, &constant_case, T)
+    ZMK_LEADER_SEQUENCE(numpad_numword, &num_word EXCEL, N)
+    ZMK_LEADER_SEQUENCE(numleft_numword, &num_word NUMS, FR_M)
+
+
+    &num_word {
+        continue-list = <BSPC DEL
+            FR_N0 FR_N1 FR_N2 FR_N3 FR_N4 FR_N5 FR_N6 FR_N7 FR_N8 FR_N9
+            FR_DOT FR_COMMA FR_PLUS FR_MINUS FR_ASTRK FR_SLASH FR_EQUAL FR_RPAR FR_LPAR
+            KP_N1 KP_N2 KP_N3 KP_N4 KP_N5 KP_N6 KP_N7 KP_N8 KP_N9 KP_N0
+            KP_DOT KP_PLUS KP_MINUS KP_ASTERISK KP_SLASH
+            >;
+    };
 
 
 
 
     // Snake case with urob's zmk-auto-layer
-    ZMK_AUTO_LAYER(case_mod, ignore-alphas; ignore-numbers; ignore-modifiers;continue-list=<SPACE FR_UNDER FR_MINUS DEL BSPC LEFT RIGHT FR_BSLH FR_SLASH>;)
-    ZMK_MACRO(end_sep_mod, bindings=<&kp BSPC &kp SPACE>;)
-    ZMK_MACRO(end_camel, bindings=<&to BASE &kp SPACE>;)
+    ZMK_AUTO_LAYER(case_mod, ignore-alphas; ignore-numbers; ignore-modifiers;continue-list=<SPACE FR_UNDER FR_MINUS DEL BSPC LEFT RIGHT FR_BSLH FR_SLASH FR_M>;)
+    ZMK_MACRO(end_sep_mod, bindings=<&kp BSPC &kp SPACE>, <&to BASE>;)
+    ZMK_MACRO(end_camel, bindings=<&to BASE &kp SPACE>, <&to BASE>;)
     ZMK_MACRO(pascal_case, bindings=<&macro_tap &sk LSHFT>, <&case_mod CAMEL>;)
     ZMK_MACRO(constant_case, bindings=<&caps_word>, <&case_mod SNAKE>;)
 
@@ -209,7 +253,6 @@
             #binding-cells = <0>;
             bindings = <&sk LSHFT>;
 
-            // akt_shft {trigger-keys = <LSHFT>; bindings = <&sk LSHFT>;};
             akt_shft {trigger-keys = <LSHFT>; bindings = <&end_camel>;};
         };
 
@@ -218,7 +261,6 @@
             #binding-cells = <0>;
             bindings = <&kp FR_UNDER>;
 
-            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
             akt_under {trigger-keys = <FR_UNDER>; bindings = <&end_sep_mod>;};
         };
 
@@ -227,7 +269,6 @@
             #binding-cells = <0>;
             bindings = <&kp FR_MINUS>;
 
-            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
             akt_kebab {trigger-keys = <FR_MINUS>; bindings = <&end_sep_mod>;};
         };
 
@@ -236,7 +277,6 @@
             #binding-cells = <0>;
             bindings = <&kp FR_BSLH>;
 
-            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
             akt_bslh {trigger-keys = <FR_BSLH>; bindings = <&end_sep_mod>;};
         };
 
@@ -245,7 +285,6 @@
             #binding-cells = <0>;
             bindings = <&kp FR_SLASH>;
 
-            // akt_under {trigger-keys = <FR_UNDER>; bindings = <&kp BSPC>;};
             akt_slash {trigger-keys = <FR_SLASH>; bindings = <&end_sep_mod>;};
         };
     };
@@ -526,7 +565,7 @@ display-name= "ACCENT";
 bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-                &kp RA(FR_Z)  &kp RA(K)     &kp RA(I)     &kp RA(U)     &kp FR_SQT        &kp RA(O)      XXX          &kp RA(P)     &kp FR_UMLAUT &kp RA(FR_EQUAL)
+                &kp RA(FR_Z)  &kp RA(K)     &kp RA(I)     &kp RA(U)     &kp FR_SQT        &kp RA(O)      XXX          &kp RA(P)     &kp FR_UMLAUT &kp RA(LS(FR_EQUAL))
      ___        &kp FR_A_GRAVE &kp RA(D)    &kp RA(R)     &kp DQT       &kp AMPS          &kp RA(G)     &kp FR_E_ACUTE &kp FR_E_GRAVE &kp FR_MU   &kp FR_U_GRAVE  ___
      ___        &kp RA(FR_A)  &kp FR_EURO   &kp FR_C_CEDILLA &kp FR_CARET &kp FR_BSLH     &kp RA(FR_W)  &kp RA(FR_X)  &kp LS(RA(FR_MINUS)) &kp LS(RA(FR_COMMA)) &kp FR_EXCL    ___
                                             &kp RA(SPACE) &kp RA(G)      ___               ___           ___           ___
@@ -548,7 +587,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &at_mu        &pct_minus    &lt_apos      &gt_grave     &sqt_dqt          &kp FR_DQT    &kp FR_LBKT   &kp FR_RBKT   &case_mod CAMEL &case_mod SNAKE
-     ___        &hash_tilde   &excl_sqr     &lpar_rpar    &rpar_dqt     &equal_plus       &kp FR_GRAVE  &sk RCTRL     &td_shft_capw &sk LALT      &sk RGUI       ___
+     ___        &hash_tilde   &excl_sqr     &lpar_rpar    &rpar_dqt     &equal_plus       &kp FR_GRAVE  &sk RCTRL     &td_shft_capw &sk LALT      &skl RGUI       ___
      ___        &kp FR_CARET  &and_pipe     &aster_fslh   &bslh_deg     &doll_pnd         &kp FR_SQT    &kp FR_LBRC   &kp FR_RBRC   &sk RALT       XXX           ___
                                              ___          &leader        ___               ___           ___           ___
         >;
@@ -568,10 +607,10 @@ display-name= "NUMBER";
 bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-                &kp KP_SLASH  &kp FR_N7     &kp FR_N8     &kp FR_N9     &kp KP_MINUS       XXX           XXX           XXX           XXX           XXX
-    &kp_l_r_par &kp FR_N0     &kp FR_N4     &kp FR_N5     &kp FR_N6     &kp KP_PLUS        XXX          &sk RCTRL     &sk RSHFT     &sk LALT      &sk RGUI       ___
-     ___        &kp KP_MULTIPLY &kp FR_N1   &kp FR_N2     &kp FR_N3     &kp KP_EQUAL       XXX          &sk RALT       XXX           XXX           XXX           ___
-                                            &kp KP_DOT     ___           ___               ___           ___           ___
+                &kp FR_SLASH  &kp FR_N7     &kp FR_N8     &kp FR_N9     &kp FR_MINUS       XXX           XXX           XXX           XXX           XXX
+    &kp_l_r_par &kp FR_N0     &kp FR_N4     &kp FR_N5     &kp FR_N6     &kp FR_PLUS        XXX          &sk RCTRL     &sk RSHFT     &sk LALT      &skl RGUI       ___
+     ___        &kp FR_ASTRK  &kp FR_N1     &kp FR_N2     &kp FR_N3     &kp FR_EQUAL       XXX          &sk RALT       XXX           XXX           XXX           ___
+                                            &kp FR_DOT     ___           ___               ___           ___           ___
         >;
     };
 
@@ -590,7 +629,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &kp LC(FR_A)  &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)  &vim_syst_clip    &kp INS       &kp HOME      &kp END        XXX           XXX
-     ___        &sk LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(FR_Z)      &kp PSCRN     &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT      XXX
+     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(FR_Z)      &kp PSCRN     &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT      XXX
     &sl_togNavM &vim_last_yank &kp LA(F4)   &kp LA(LC(LGUI)) &sk RALT   &kp LC(FR_Y)      &kp PAUSE_BREAK &kp PG_UP   &kp PG_DN      XXX          &kp K_APP      &sl_togNavM
                                              ___           ___           ___               ___           ___           ___
         >;
@@ -611,7 +650,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 XXX           XXX           &kp END       &kp HOME      &kp INS           &vim_syst_clip &kp LC(FR_V)  &kp LC(FR_C)  &kp LC(FR_X)  &kp LC(FR_A)
-     XXX       &kp RIGHT     &kp UP        &kp DOWN      &kp LEFT      &kp PSCRN         &kp LC(FR_Z)   &sk LCTRL     &sk LSHFT     &sk LALT      &sk LGUI       ___
+     XXX       &kp RIGHT     &kp UP        &kp DOWN      &kp LEFT      &kp PSCRN         &kp LC(FR_Z)   &sk LCTRL     &sk LSHFT     &sk LALT      &skl LGUI       ___
   &t_off NAV_M &kp K_APP      XXX           &kp PG_DN     &kp PG_UP     &kp PAUSE_BREAK   &kp LC(FR_Y)   &sk RALT      &kp LA(LC(LGUI)) &kp LA(F4) &vim_last_yank &t_off NAV_M
                                              ___           ___           ___               ___           ___           ___
         >;
@@ -646,7 +685,7 @@ display-name= "APPS";
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃  LSHFT    ┃   LGUI      ┃    LALT     ┃   LSHIFT    ┃   LCTRL     ┃   td_reset  ┃   ┃ Context Menu┃   browser   ┃             ┃ Sh+Alt+Ctl+T┃             ┃    /      ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃  out USB    ┃ out BLE     ┃             ┃   RALT      ┃             ┃   ┃ Sh+Alt+Ctl+K┃  Ctrl+Alt+F ┃   Calc      ┃ Sh+Gui+S    ┃             ┃  swap     ┃
+// ┃  swap     ┃  out USB    ┃ out BLE     ┃   ind_bat   ┃   RALT      ┃ ind_con     ┃   ┃ Sh+Alt+Ctl+K┃  Ctrl+Alt+F ┃   Calc      ┃ Sh+Gui+S    ┃             ┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                         ┃    ESC      ┃    SPC      ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
 //                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
@@ -656,7 +695,7 @@ bindings = <
 
                 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR        &td_reset     &kp LA(L)     &kp LC(FR_SQUARE)  XXX       XXX
      ___        &kp LGUI      &kp LALT      &kp LSHIFT    &kp LCTRL     &td_reset         &kp K_APP     &kp C_AL_WWW  XXX          &kp LS(LA(LC(T)))  XXX       ___
-     ___        &out OUT_USB  &out OUT_BLE   XXX          &kp RALT       XXX              &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp C_AL_CALC XXX           XXX           ___
+     ___        &out OUT_USB  &out OUT_BLE  &ind_bat      &kp RALT      &ind_con          &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp C_AL_CALC XXX           XXX           ___
                                              ___           ___           ___               ___           ___           ___
                         >;
                 };
@@ -677,7 +716,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                  XXX          &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)   XXX               XXX          &msc SCRL_UP  &mmv MOVE_UP  &msc SCRL_DOWN  XXX
-     ___        &sk LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp ESC            XXX          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT  XXX       ___
+     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp ESC            XXX          &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT  XXX       ___
      ___         XXX          &kp RALT      &mo MOUSE_SCR &mkp MB4      &mkp MB5           XXX          &msc SCRL_LEFT  XXX          &msc SCRL_RIGHT  XXX        ___
                                             &mkp LCLK     &mkp MCLK     &mkp RCLK         &mkp LCLK     &mkp MCLK     &mkp RCLK
                         >;
@@ -720,8 +759,8 @@ bindings = <
 
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-                &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     &kp F2            &kp KP_PLUS   &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_MINUS
-     ___        &sk LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LS(G)         &kp KP_N0     &kp KP_N4     &kp KP_N5     &kp KP_N6     &kp KP_PLUS    ___
+                &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     &kp F2            &kp KP_SLASH  &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_MINUS
+     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LS(G)         &kp KP_N0     &kp KP_N4     &kp KP_N5     &kp KP_N6     &kp KP_PLUS    ___
      ___         XXX          &kp LC(FR_X)  &kp LC(FR_C)  &kp RALT      &kp LC(FR_V)      &kp KP_ASTERISK &kp KP_N1   &kp KP_N2     &kp KP_N3     &kp KP_DOT     ___
                                              ___           ___           ___               ___           ___           ___
                         >;
@@ -745,7 +784,7 @@ bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___     &ak_snake ___              ___         ___           ___
+                                             ___           &ak_snake     &mo EXCEL         ___         ___           ___
                         >;
                 };
 
@@ -767,7 +806,7 @@ bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___     &ak_camel ___               ___         ___           ___
+                                             ___           &ak_camel     ___               ___         ___           ___
                         >;
                 };
 
@@ -789,7 +828,7 @@ bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___      &ak_kebab  ___             ___         ___           ___
+                                             ___           &ak_kebab     &mo EXCEL         ___         ___           ___
                         >;
                 };
 
@@ -811,7 +850,7 @@ bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___      &ak_bslh  ___             ___         ___           ___
+                                             ___           &ak_bslh      &mo EXCEL         ___         ___           ___
                         >;
                 };
 slsh_layer {
@@ -832,7 +871,7 @@ bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___            XXX
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___      &ak_slash ___             ___         ___           ___
+                                             ___           &ak_slash     &mo EXCEL         ___         ___           ___
                         >;
                 };
        };
