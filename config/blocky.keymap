@@ -4,6 +4,8 @@
 // ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
+
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -232,6 +234,7 @@
             KP_N1 KP_N2 KP_N3 KP_N4 KP_N5 KP_N6 KP_N7 KP_N8 KP_N9 KP_N0
             KP_DOT KP_PLUS KP_MINUS KP_ASTERISK KP_SLASH
             >;
+        ignore-modifiers;
     };
 
 
@@ -310,139 +313,6 @@
             toggle-mode = "off";
         };
 
-
-        // Symbol mod-morphs
-        // at_mu: at_mu{
-        //     display-name = "@/µ";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp AT>, <&kp FR_MU>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // pct_minus: pct_minus{
-        //     display-name = "%/-";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_PERCENT>, <&kp MINUS>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // lt_apos: lt_apos{
-        //     display-name = "</'";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_LT>, <&kp RA(FR_G)>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // gt_grave: gt_grave{
-        //     display-name = ">/`";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_GT>, <&kp FR_GRAVE>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // sqt_dqt: sqt_dqt{
-        //     display-name = "'/ dqot";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_SQT>, <&kp FR_DQT>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // hash_tilde: hash_tilde{
-        //     display-name = "#/~";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_HASH>, <&kp FR_TILDE>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // excl_sqr: excl_sqr{
-        //     display-name = "!/²";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_EXCL>, <&kp FR_SQUARE>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // lpar_rpar: lpar_rpar{
-        //     display-name = "(/)";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_LPAR>, <&kp FR_RPAR>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // rpar_dqt: rpar_dqt{
-        //     display-name = ")/ dqot";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_RPAR>, <&kp FR_DQT>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // equal_plus: equal_plus{
-        //     display-name = "=/+";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_EQUAL>, <&kp FR_PLUS>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // and_pipe: and_pipe{
-        //     display-name = "&/|";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_AMPERSAND>, <&kp FR_PIPE>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // lbrc_rbrc: lbrc_rbrc{
-        //     display-name = "{/}";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_LBRC>, <&kp FR_RBRC>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // hash_tild: hash_tild{
-        //     display-name = "#/~";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_HASH>, <&kp FR_TILDE>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-        // aster_fslh: aster_fslh{
-        //     display-name = "*/:";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_ASTERISK>, <&kp FR_FSLH>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // bslh_deg: bslh_deg{
-        //     display-name = "\\/°";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_BSLH>, <&kp FR_DEG>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
-
-        // doll_pnd: doll_pnd {
-        //     display-name = "$/£";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_DOLLAR>, <&kp FR_POUND_SIGN>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-
-        // };
-
-        // kp_l_r_par: kp_l_r_par {
-        //     display-name = "()";
-        //     #binding-cells = <0>;
-        //     compatible = "zmk,behavior-mod-morph";
-        //     bindings = <&kp FR_LPAR>, <&kp FR_RPAR>;
-        //     mods = <(MOD_LSFT|MOD_RSFT)>;
-        // };
 
         ht_sk: hold_tap_sticky {
             compatible = "zmk,behavior-hold-tap";
@@ -566,7 +436,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &kp RA(FR_Z)  &kp RA(K)     &kp RA(I)     &kp RA(U)     &kp FR_SQT        &kp RA(O)      XXX          &kp RA(P)     &kp FR_UMLAUT &kp RA(LS(FR_EQUAL))
-     ___        &kp FR_A_GRAVE &kp RA(D)    &kp RA(R)     &kp DQT       &kp AMPS          &kp RA(G)     &kp FR_E_ACUTE &kp FR_E_GRAVE &kp FR_MU   &kp FR_U_GRAVE  ___
+     ___        &kp FR_A_GRAVE &kp RA(D)    &kp RA(R)     &kp DQT       &and_pipe         &kp RA(G)     &kp FR_E_ACUTE &kp FR_E_GRAVE &kp FR_MU   &kp FR_U_GRAVE  ___
      ___        &kp RA(FR_A)  &kp FR_EURO   &kp FR_C_CEDILLA &kp FR_CARET &kp FR_BSLH     &kp RA(FR_W)  &kp RA(FR_X)  &kp LS(RA(FR_MINUS)) &kp LS(RA(FR_COMMA)) &kp FR_EXCL    ___
                                             &kp RA(SPACE) &kp RA(G)      ___               ___           ___           ___
         >;
@@ -694,8 +564,8 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR        &td_reset     &kp LA(L)     &kp LC(FR_SQUARE)  XXX       XXX
-     ___        &kp LGUI      &kp LALT      &kp LSHIFT    &kp LCTRL     &td_reset         &kp K_APP     &kp C_AL_WWW  XXX          &kp LS(LA(LC(T)))  XXX       ___
-     ___        &out OUT_USB  &out OUT_BLE  &ind_bat      &kp RALT      &ind_con          &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp C_AL_CALC XXX           XXX           ___
+     ___        &kp LGUI      &kp LALT      &kp LSHIFT    &kp LCTRL     &td_reset         &kp K_APP     &kp C_AC_HOME XXX          &kp LS(LA(LC(T)))  XXX           ___
+     ___        &out OUT_USB  &out OUT_BLE  &ind_bat      &kp RALT      &ind_con          &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp C_AL_CALC &kp LG(LS(S)) XXX           ___
                                              ___           ___           ___               ___           ___           ___
                         >;
                 };
@@ -768,15 +638,6 @@ bindings = <
 
 snake_layer {
 display-name= "SNAKE";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 bindings = <
 
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
@@ -790,15 +651,6 @@ bindings = <
 
 camel_layer {
 display-name= "CAMEL";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 bindings = <
 
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
@@ -812,15 +664,6 @@ bindings = <
 
 kebab_layer {
 display-name= "KEBAB";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 bindings = <
 
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
@@ -834,15 +677,6 @@ bindings = <
 
 path_layer {
 display-name= "PATH_CASE";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 bindings = <
 
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
@@ -855,15 +689,6 @@ bindings = <
                 };
 slsh_layer {
 display-name= "SLSH_CASE";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 bindings = <
 
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
