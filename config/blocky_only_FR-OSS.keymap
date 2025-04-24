@@ -5,7 +5,6 @@
 
 
 
-#define HOST_OS 2
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
@@ -25,37 +24,35 @@
 #define BASE 0
 #define BASE_M 1
 #define ACCENT 2
-#define UC_ACCENT 3
-#define SYM 4
-#define NUMS 5
-#define NAV 6
-#define NAV_M 7
-#define FUNCTION_L 8
-#define APPS 9
-#define MOUSE 10
-#define MOUSE_TP 11
-#define MOUSE_SCR 12
-#define EXCEL 13
-#define SNAKE 14
-#define CAMEL 15
-#define KEBAB 16
-#define PATH_CASE 17
-#define SLSH_CASE 18
+#define SYM 3
+#define NUMS 4
+#define NAV 5
+#define NAV_M 6
+#define FUNCTION_L 7
+#define APPS 8
+#define MOUSE_TP 9
+#define MOUSE_SCR 10
+#define EXCEL 11
+#define SNAKE 12
+#define CAMEL 13
+#define KEBAB 14
+#define PATH_CASE 15
+#define SLSH_CASE 16
 
 
 #define HAS_MOUSE_KEYS
-// #define HAS_MOUSE
+// #define HAS_MOUSE_TP
 
 #ifdef HAS_MOUSE_KEYS
   #include <dt-bindings/zmk/mouse.h>
   #include <behaviors/mouse_keys.dtsi>
 #endif  // HAS_MOUSE_KEYS
 
-// #ifdef HAS_MOUSE
+// #ifdef HAS_MOUSE_TP
 //   // We store the trackpoint settings in a separate file
 //   // to make organization a little easier.
 //   #include "include/mouse_tp.dtsi"
-// #endif  // HAS_MOUSE
+// #endif  // HAS_MOUSE_TP
 
 #define STICKY_TOGGLE(name, layer)           \
   sl_tog##name: sticky_layer_toggle##name {  \
@@ -80,7 +77,7 @@
         }; \
     };
 
-// #ifdef HAS_MOUSE
+// #ifdef HAS_MOUSE_TP
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
@@ -92,7 +89,7 @@
 };
 &trackpoint_listener {
     input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_temp_layer MOUSE_TP 1000 >;
-    // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,<&zip_temp_layer MOUSE 1000>;
+    // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,<&zip_temp_layer MOUSE_TP 1000>;
     scroller {
         layers = <MOUSE_SCR>;
         input-processors = <&zip_xy_to_scroll_mapper>,<&zip_scroll_scaler 1 5>;
@@ -108,24 +105,15 @@
 
 &sk {
     quick-release;
-    release-after-ms = <5000>;
 };
 
 / {
     behaviors {
-        sknq: sticky_key_no_quick_release {
-            compatible = "zmk,behavior-sticky-key";
-            #binding-cells = <1>;
-            bindings = <&kp>;
-            release-after-ms = <5000>;
-            lazy;
-            ignore-modifiers;
-        };
         skl: sticky_key_lazy {
             compatible = "zmk,behavior-sticky-key";
             #binding-cells = <1>;
             bindings = <&kp>;
-            release-after-ms = <5000>;
+            release-after-ms = <1000>;
             lazy;
             quick-release;
             ignore-modifiers;
@@ -179,82 +167,12 @@
     // Test pour caps_word pour FR_M
     // ZMK_MOD_MORPH(m_supM, bindings = <&kp FR_M>, <&kp FR_M>; mods = <(MOD_LSFT|MOD_RSFT)>; )
 
-
-    // Macros pour les lettres accentuées minuscules et majuscules
-    ZMK_MACRO(fr_a_circ, bindings = <&kp FR_CARET &kp FR_A>;)
-    ZMK_MACRO(fr_e_circ, bindings = <&kp FR_CARET &kp FR_E>;)
-    ZMK_MACRO(fr_i_circ, bindings = <&kp FR_CARET &kp FR_I>;)
-    ZMK_MACRO(fr_o_circ, bindings = <&kp FR_CARET &kp FR_O>;)
-    ZMK_MACRO(fr_u_circ, bindings = <&kp FR_CARET &kp FR_U>;)
-
-    ZMK_MACRO(fr_a_trem, bindings = <&kp LS(FR_CARET) &kp FR_A>;)
-    ZMK_MACRO(fr_e_trem, bindings = <&kp LS(FR_CARET) &kp FR_E>;)
-    ZMK_MACRO(fr_i_trem, bindings = <&kp LS(FR_CARET) &kp FR_I>;)
-    ZMK_MACRO(fr_o_trem, bindings = <&kp LS(FR_CARET) &kp FR_O>;)
-    ZMK_MACRO(fr_u_trem, bindings = <&kp LS(FR_CARET) &kp FR_U>;)
-
-
-    ZMK_MACRO(fr_A_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_A)>;)
-    ZMK_MACRO(fr_E_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_E)>;)
-    ZMK_MACRO(fr_I_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_I)>;)
-    ZMK_MACRO(fr_O_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_O)>;)
-    ZMK_MACRO(fr_U_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_U)>;)
-
-    ZMK_MACRO(fr_A_circ, bindings = <&kp FR_CARET &kp LS(FR_A)>;)
-    ZMK_MACRO(fr_E_circ, bindings = <&kp FR_CARET &kp LS(FR_E)>;)
-    ZMK_MACRO(fr_I_circ, bindings = <&kp FR_CARET &kp LS(FR_I)>;)
-    ZMK_MACRO(fr_O_circ, bindings = <&kp FR_CARET &kp LS(FR_O)>;)
-    ZMK_MACRO(fr_U_circ, bindings = <&kp FR_CARET &kp LS(FR_U)>;)
-
-    // Majuscules existantes
-    ZMK_MACRO(fr_A_grave, bindings = <&kp FR_GRAVE &kp LS(FR_A)>;)
-    ZMK_MACRO(fr_E_grave, bindings = <&kp FR_GRAVE &kp LS(FR_E)>;)
-    ZMK_MACRO(fr_U_grave, bindings = <&kp FR_GRAVE &kp LS(FR_U)>;)
-
-    // Majuscules pour les accents des touches existantes en mode FR_OSS
-    ZMK_MOD_MORPH(fr_a_graveM,  bindings = <&kp FR_A_GRAVE>, <&fr_A_grave>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(fr_e_graveM,  bindings = <&kp FR_E_GRAVE>, <&fr_E_grave>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(fr_e_acuteM,  bindings = <&kp FR_E_ACUTE>, <&kp RA(LS(FR_E_ACUTE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(fr_c_cedillaM,bindings = <&kp FR_C_CEDILLA>, <&kp RA(LS(FR_C_CEDILLA))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(fr_u_graveM,  bindings = <&kp FR_U_GRAVE>, <&fr_U_grave>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_a_graveM,  bindings = <&kp FR_A_GRAVE>, <&kp RA(LS(FR_A_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_e_graveM,  bindings = <&kp FR_E_GRAVE>, <&kp RA(LS(FR_E_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_e_acuteM,  bindings = <&kp FR_E_ACUTE>, <&kp RA(LS(FR_E_ACUTE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_c_cedillaM,bindings = <&kp FR_C_CEDILLA>, <&kp RA(LS(FR_C_CEDILLA))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_u_graveM,  bindings = <&kp FR_U_GRAVE>, <&kp RA(LS(FR_U_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-
-    // Gestion accents et majuscules en mode unicode
-    UC_MACRO(u_fr_a_graveM ,    &kp KP_N0 &kp KP_N1 &kp KP_N9 &kp KP_N2)  // à(0224)/À(0192)
-    UC_MACRO(u_fr_e_graveM ,    &kp KP_N0 &kp KP_N2 &kp KP_N0 &kp KP_N0)  // è(0232)/È(0200)
-    UC_MACRO(u_fr_e_acuteM ,    &kp KP_N0 &kp KP_N2 &kp KP_N0 &kp KP_N1)  // é(0233)/É(0201)
-    UC_MACRO(u_fr_c_cedillaM ,  &kp KP_N0 &kp KP_N1 &kp KP_N9 &kp KP_N9)  // ç(0231)/Ç(0199)
-    UC_MACRO(u_fr_u_graveM ,    &kp KP_N0 &kp KP_N2 &kp KP_N1 &kp KP_N7)  // ù(0249)/Ù(0217)
-
-    ZMK_MOD_MORPH(u_fr_a_grave,   bindings = <&kp FR_A_GRAVE>, <&u_fr_a_graveM>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(u_fr_e_grave,   bindings = <&kp FR_E_GRAVE>, <&u_fr_e_graveM>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(u_fr_e_acute,   bindings = <&kp FR_E_ACUTE>, <&u_fr_e_acuteM>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(u_fr_c_cedilla, bindings = <&kp FR_C_CEDILLA>, <&u_fr_c_cedillaM>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(u_fr_u_grave,   bindings = <&kp FR_U_GRAVE>, <&u_fr_u_graveM>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-
-    ZMK_UNICODE_PAIR(u_fr_ae,           KP_N0, KP_N2, KP_N3, KP_N0,  KP_N0, KP_N1, KP_N9, KP_N8)  // æ(0230)/Æ(0198)
-    ZMK_UNICODE_PAIR(u_fr_oe,           KP_N0, KP_N1, KP_N5, KP_N6,  KP_N0, KP_N1, KP_N4, KP_N0)  // œ(0156)/Œ(0140)
-    ZMK_UNICODE_PAIR(u_fr_a_circumflex, KP_N0, KP_N2, KP_N2, KP_N6,  KP_N0, KP_N1, KP_N9, KP_N4)  // â(0226)/Â(0194)
-    ZMK_UNICODE_PAIR(u_fr_e_circumflex, KP_N0, KP_N2, KP_N3, KP_N4,  KP_N0, KP_N2, KP_N0, KP_N2)  // ê(0234)/Ê(0202)
-    ZMK_UNICODE_PAIR(u_fr_e_diaeresis,  KP_N0, KP_N2, KP_N3, KP_N5,  KP_N0, KP_N2, KP_N0, KP_N3)  // ë(0235)/Ë(0203)
-    ZMK_UNICODE_PAIR(u_fr_i_circumflex, KP_N0, KP_N2, KP_N3, KP_N8,  KP_N0, KP_N2, KP_N0, KP_N6)  // î(0238)/Î(0206)
-    ZMK_UNICODE_PAIR(u_fr_i_diaeresis,  KP_N0, KP_N2, KP_N3, KP_N9,  KP_N0, KP_N2, KP_N0, KP_N7)  // ï(0239)/Ï(0207)
-    ZMK_UNICODE_PAIR(u_fr_o_circumflex, KP_N0, KP_N2, KP_N4, KP_N4,  KP_N0, KP_N2, KP_N1, KP_N2)  // ô(0244)/Ô(0212)
-    ZMK_UNICODE_PAIR(u_fr_u_circumflex, KP_N0, KP_N2, KP_N5, KP_N1,  KP_N0, KP_N2, KP_N1, KP_N9)  // û(0251)/Û(0219)
-    ZMK_UNICODE_PAIR(u_fr_u_diaeresis,  KP_N0, KP_N2, KP_N5, KP_N2,  KP_N0, KP_N2, KP_N2, KP_N0)  // ü(0252)/Ü(0220)
-    ZMK_UNICODE_PAIR(u_fr_y_diaeresis,  KP_N0, KP_N2, KP_N5, KP_N5,  KP_N0, KP_N1, KP_N5, KP_N9)  // ÿ(0255)/Ÿ(0159)
-
-    ZMK_UNICODE_PAIR(u_plus_minus, KP_N0, KP_N1, KP_N7, KP_N7, KP_N0, KP_N1, KP_N7, KP_N7)
-    ZMK_UNICODE_PAIR(u_fr_apostrophe, KP_N0, KP_N1, KP_N4, KP_N6, KP_N0, KP_N1, KP_N4, KP_N6)
-    ZMK_UNICODE_PAIR(u_fr_daqleft, KP_N0, KP_N1, KP_N7, KP_N1, KP_N0, KP_N1, KP_N4, KP_N7)
-    ZMK_UNICODE_PAIR(u_fr_daqright, KP_N0, KP_N1, KP_N8, KP_N7, KP_N0, KP_N1, KP_N4, KP_N8)
-    ZMK_UNICODE_PAIR(u_fr_tiret_quad, KP_N0, KP_N1, KP_N5, KP_N0, KP_N0, KP_N1, KP_N5, KP_N1)
-    ZMK_UNICODE_PAIR(u_fr_ellipsis, KP_N0, KP_N1, KP_N3, KP_N3, KP_N0, KP_N1, KP_N3, KP_N3)
-
+    // Majuscules pour les accents des touches existantes
+    ZMK_MOD_MORPH(fr_a_graveM, bindings = <&kp FR_A_GRAVE>, <&kp RA(LS(FR_A_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+    ZMK_MOD_MORPH(fr_e_graveM, bindings = <&kp FR_E_GRAVE>, <&kp RA(LS(FR_E_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+    ZMK_MOD_MORPH(fr_e_acuteM, bindings = <&kp FR_E_ACUTE>, <&kp RA(LS(FR_E_ACUTE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+    ZMK_MOD_MORPH(fr_c_cedillaM, bindings = <&kp FR_C_CEDILLA>, <&kp RA(LS(FR_C_CEDILLA))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+    ZMK_MOD_MORPH(fr_u_graveM, bindings = <&kp FR_U_GRAVE>, <&kp RA(LS(FR_U_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
 
 
 
@@ -286,17 +204,16 @@
 
 
     // Combos
-    ZMK_COMBO(qu, &qu_macro,  LT4 LT3, BASE BASE_M)
-    ZMK_COMBO(td_colon,  &kp FR_COLON,  LM1 LB1, BASE BASE_M)
-    ZMK_COMBO(sc_0,      &kp FR_N0,     LM2 LB2, BASE BASE_M)
+    ZMK_COMBO(qu, &qu_macro,  LT4 LT3)
+    ZMK_COMBO(td_colon,  &kp FR_COLON,  LM1 LB1)
+    ZMK_COMBO(sc_0,      &kp FR_N0,     LM2 LB2)
 
-    ZMK_COMBO(nh_circ,   &kp RA(FR_C_CEDILLA),  RM1 RB1, BASE BASE_M)
-    ZMK_COMBO(ecomm_dol, &kp FR_DOLLAR,  RM2 RB2, BASE BASE_M)
-    ZMK_COMBO(mn_semi,   &kp FR_SEMICOLON, RM0 RM1, BASE BASE_M)
+    ZMK_COMBO(nh_circ,   &kp RA(FR_C_CEDILLA),  RM1 RB1)
+    ZMK_COMBO(ecomm_dol, &kp FR_DOLLAR,  RM2 RB2)
+    ZMK_COMBO(mn_semi,   &kp FR_SEMICOLON, RM0 RM1)
 
     // Mouse layer access
-    // ZMK_COMBO(mo_mouse,  &smart_mouse,   LM5 LB5)   // !not working (maybe because LB5 is not ignored)
-    ZMK_COMBO(mo_mouse,  &smart_mouse,   LT2 LT3)
+    ZMK_COMBO(mo_mouse,  &mo MOUSE_TP,   LM5 LB5)
 
     // Locking num layer with toggle
     ZMK_TAP_DANCE(lock_num, bindings=<&to NUMS>, <&tog NUMS>;tapping-term-ms=<300>;)
@@ -305,27 +222,14 @@
     ZMK_COMBO(tog_nav,    &lock_nav,     RM5 RB5, NAV)
 
     // Leader sequences
-    // Rapha
     ZMK_MACRO(macro_first_name, bindings=<&kp R>;)
-    // ZMK_MACRO(macro_first_name, bindings=<&kp R>;)
     ZMK_MACRO(macro_last_name, bindings=<&kp R>;)
     // [redacted]
     ZMK_MACRO(macro_tel, bindings=<&kp R>;)
-    // [redacted]
-    ZMK_MACRO(macro_mail_free, bindings=<&kp R>;)
-    // [redacted]
-    ZMK_MACRO(macro_mail_gmail, bindings=<&kp R>;)
-    // [redacted]
-    ZMK_MACRO(macro_mail_cdl, bindings=<&kp R>;)
 
     ZMK_LEADER_SEQUENCE(first_name,    &macro_first_name, R P)
     ZMK_LEADER_SEQUENCE(last_name,   &macro_last_name, R D)
     ZMK_LEADER_SEQUENCE(telephone,  &macro_tel, R T)
-
-    ZMK_LEADER_SEQUENCE(mail_free,  &macro_mail_free, R FR_M F)
-    ZMK_LEADER_SEQUENCE(mail_gmail,  &macro_mail_gmail, R FR_M G)
-    ZMK_LEADER_SEQUENCE(mail_cdl,   &macro_mail_cdl, R FR_M C)
-
     // Case mods
     ZMK_LEADER_SEQUENCE(snake_mod,  &case_mod SNAKE, S)
     ZMK_LEADER_SEQUENCE(camel_mod,  &case_mod CAMEL, C)
@@ -358,28 +262,14 @@
     ZMK_MACRO(pascal_case, bindings=<&macro_tap &sk LSHFT>, <&case_mod CAMEL>;)
     ZMK_MACRO(constant_case, bindings=<&caps_word>, <&case_mod SNAKE>;)
 
-// Smart-mouse, requires tri-state module.
-    ZMK_TRI_STATE(
-        smart_mouse, bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
-        ignored-key-positions =
-            <LT1 LT2 LT3 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LH0 LH1 LH2 RT1 RT2 RT3 RM1 RM2 RM3 RB1 RB3 RH0 RH1 RH2>;
-        ignored-layers = <MOUSE NAV>;)
 
-
-    // My caps-word using tri-state
-    ZMK_TRI_STATE(
-        my_caps_word, bindings = <&kt LSHFT>, <&none>, <&kt LSHFT>;
-        ignored-key-positions =
-            <LT0 LT1 LT2 LT3 LT4 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4 LB5 RT0 RT1 RT2 RT3 RT4 RM0 RM1 RM2 RM3 RM4 RM5 RB1 RB2 RH1 RH2>;
-        ignored-layers = <BASE BASE_M ACCENT UC_ACCENT NUMS>;)
-
+    // ZMK_ADAPTIVE_KEY(camel, bindings=<LSHFT>; )
 / {
     behaviors {
         ak_camel: ak_camel {
             compatible = "zmk,behavior-adaptive-key";
             #binding-cells = <0>;
             bindings = <&sk LSHFT>;
-
 
             akt_shft {trigger-keys = <LSHFT>; bindings = <&end_camel>;};
         };
@@ -507,17 +397,16 @@ display-name= "BASE"                              ;
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
 //             ┃     Q       ┃     Z       ┃     F       ┃     P       ┃     B       ┃   ┃     J       ┃     L       ┃     O       ┃   dead      ┃     Y       ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃     A       ┃     R       ┃     S       ┃     T       ┃     G       ┃   ┃     M       ┃     N       ┃     E       ┃     I       ┃     U       ┃   _ ?     ┃
+// ┃  LSHFT    ┃     A       ┃     R       ┃     S       ┃     T       ┃     G       ┃   ┃     M       ┃     N       ┃     E       ┃     I       ┃     U       ┃   - ?     ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃     W       ┃     X       ┃     C       ┃     D       ┃     V       ┃   ┃     K       ┃     H       ┃    , ;      ┃    . :      ┃    - /      ┃  swap     ┃
+// ┃  swap     ┃     W       ┃     X       ┃     C       ┃     D       ┃     V       ┃   ┃     K       ┃     H       ┃    , ;      ┃    . _      ┃    / :      ┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                         ┃    ESC      ┃    SPC      ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
 //                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-                // &kp FR_Q      &kp FR_Z      &kp F         &kp P         &kp B             &kp J         &kp L         &kp O         &sl ACCENT    &kp FR_Y
-                &kp FR_Q      &kp FR_Z      &kp F         &kp P         &kp B             &kp J         &kp L         &kp O         &sl ACCENT       &kp FR_Y
+                &kp FR_Q      &kp FR_Z      &kp F         &kp P         &kp B             &kp J         &kp L         &kp O         &sl ACCENT    &kp FR_Y
 &td_shft_capw   &hml LGUI FR_A &hml LALT R  &hml LSHFT S  &hml LCTRL T  &kp G             &kp FR_M      &hmr RCTRL N  &hmr RSHFT E  &hmr LALT I   &hmr RGUI U   &under_qmark
   &sl_togBaseM  &kp FR_W      &kp X         &kp C         &hml RALT D   &kp V             &kp K         &hmr RALT H   &comma_semi   &dot_colon    &minus_slash  &sl_togBaseM
                                 &lt APPS ESC       &lt EXCEL SPACE     &lt NAV TAB        &lt NUMS RET       &lt SYM BSPC      &lt FUNCTION_L DEL
@@ -561,43 +450,17 @@ display-name= "ACCENT";
 bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-    //             &kp RA(FR_Z)  &kp RA(K)     &kp RA(I)      &kp RA(U)     &kp FR_SQT        &kp RA(O)     XXX          &kp RA(P)             &kp FR_UMLAUT         &kp RA(LS(FR_EQUAL))
-    //  ___        &fr_a_graveM  &kp RA(D)     &kp RA(R)      &kp DQT       &and_pipe         &kp RA(G)     &fr_e_acuteM &fr_e_graveM          &kp FR_MU             &fr_u_graveM    ___
-    //  ___        &kp RA(FR_A)  &kp FR_EURO   &fr_c_cedillaM &kp FR_CARET  &kp FR_BSLH       &kp RA(FR_W)  &kp RA(FR_X) &kp LS(RA(FR_MINUS))  &kp LS(RA(FR_COMMA))  &kp FR_EXCL    ___
-    //                                         &kp RA(SPACE)  &kp RA(G)      ___               ___           ___           ___
-
-                &fr_a_circ    &fr_i_trem    &fr_i_circ     &fr_u_circ    &kp FR_SQT        &kp RA(O)     XXX          &fr_o_circ            &kp FR_UMLAUT         &kp RA(LS(FR_EQUAL))
-     ___        &fr_a_graveM  &fr_e_trem    &fr_e_circ     &kp DQT       &and_pipe         &kp RA(G)     &fr_e_acuteM &fr_e_graveM          &kp FR_MU             &fr_u_graveM    ___
+                &kp RA(FR_Z)  &kp RA(K)     &kp RA(I)      &kp RA(U)     &kp FR_SQT        &kp RA(O)     XXX          &kp RA(P)             &kp FR_UMLAUT         &kp RA(LS(FR_EQUAL))
+     ___        &fr_a_graveM  &kp RA(D)     &kp RA(R)      &kp DQT       &and_pipe         &kp RA(G)     &fr_e_acuteM &fr_e_graveM          &kp FR_MU             &fr_u_graveM    ___
      ___        &kp RA(FR_A)  &kp FR_EURO   &fr_c_cedillaM &kp FR_CARET  &kp FR_BSLH       &kp RA(FR_W)  &kp RA(FR_X) &kp LS(RA(FR_MINUS))  &kp LS(RA(FR_COMMA))  &kp FR_EXCL    ___
                                             &kp RA(SPACE)  &kp RA(G)      ___               ___           ___           ___
-        >;
-    };
-
-unicode_accent_layer {
-display-name= "UNICODE_ACCENT";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃     â       ┃     ï       ┃     î       ┃     û       ┃     '       ┃   ┃     œ       ┃             ┃     ô       ┃     ¨       ┃     ±       ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃     à       ┃     ë       ┃     ê       ┃     "       ┃     &       ┃   ┃     ’       ┃     é       ┃     è       ┃     µ       ┃     ù       ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃     ae      ┃     €       ┃     ç       ┃     ^       ┃     \       ┃   ┃     «       ┃     »       ┃     ‑       ┃     …       ┃     !       ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃    ESC      ┃    SPC      ┃    TAB      ┃   ┃   ENTER     ┃   BSPC      ┃   DELETE    ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-bindings = <
-// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
-
-                &u_fr_a_circumflex &u_fr_i_diaeresis &u_fr_i_circumflex &u_fr_u_circumflex &kp FR_SQT           &u_fr_oe         XXX            &u_fr_o_circumflex     &kp FR_UMLAUT    &u_plus_minus
-     ___        &u_fr_a_grave      &u_fr_e_diaeresis &u_fr_e_circumflex &kp DQT          &and_pipe            &u_fr_apostrophe &u_fr_e_acute    &u_fr_e_grave          &kp FR_MU       &u_fr_u_grave  ___
-     ___        &u_fr_ae           &kp FR_EURO     &u_fr_c_cedilla    &kp FR_CARET     &kp FR_BSLH          &u_fr_daqleft    &u_fr_daqright   &u_fr_tiret_quad       &u_fr_ellipsis    &kp FR_EXCL    ___
-                                            &kp RA(SPACE) &u_fr_apostrophe ___               ___           ___           ___
         >;
     };
 
 symbol_layer {
 display-name= "SYMBOL";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃    @ µ      ┃    % -      ┃     <       ┃     >       ┃     '       ┃   ┃     "       ┃     [       ┃     ]       ┃  Accent UC  ┃             ┃
+//             ┃    @ µ      ┃    % -      ┃     <       ┃     >       ┃     '       ┃   ┃     "       ┃     [       ┃     ]       ┃ camel mod   ┃  snake mod  ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃  LSHFT    ┃     #       ┃     !       ┃     (       ┃     )       ┃     =       ┃   ┃     `       ┃  osm RCTRL  ┃  osm RSHFT  ┃  osm LALT   ┃  osm RGUI   ┃    /      ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
@@ -608,8 +471,8 @@ display-name= "SYMBOL";
 bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-                &at_mu        &pct_minus    &lt_apos      &gt_grave     &sqt_dqt          &kp FR_DQT    &kp FR_LBKT   &kp FR_RBKT   &sl UC_ACCENT   XXX
-     ___        &hash_tilde   &excl_sqr     &lpar_rpar    &rpar_dqt     &equal_plus       &kp FR_GRAVE  &sknq RCTRL     &td_shft_capw &sk LALT      &skl RGUI       ___
+                &at_mu        &pct_minus    &lt_apos      &gt_grave     &sqt_dqt          &kp FR_DQT    &kp FR_LBKT   &kp FR_RBKT   &case_mod CAMEL &case_mod SNAKE
+     ___        &hash_tilde   &excl_sqr     &lpar_rpar    &rpar_dqt     &equal_plus       &kp FR_GRAVE  &sk RCTRL     &td_shft_capw &sk LALT      &skl RGUI       ___
      ___        &kp FR_CARET  &and_pipe     &aster_fslh   &bslh_deg     &doll_pnd         &kp FR_SQT    &kp FR_LBRC   &kp FR_RBRC   &sk RALT       XXX           ___
                                              ___          &leader        ___               ___           ___           ___
         >;
@@ -641,7 +504,7 @@ display-name= "NAVIGATION";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
 //             ┃   ctrl+A    ┃   ctrl+X    ┃   ctrl+C    ┃   ctrl+V    ┃ vim syst cli┃   ┃   Insert    ┃    Home     ┃    End      ┃             ┃             ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃ smartMouse┃ osm LGUI    ┃  osm LALT   ┃  osm LSHFT  ┃  osm LCTRL  ┃   ctrl+Z    ┃   ┃ Print Screen┃    Left     ┃    Down     ┃     Up      ┃    Right    ┃           ┃
+// ┃  LSHFT    ┃ osm LGUI    ┃  osm LALT   ┃  osm LSHFT  ┃  osm LCTRL  ┃   ctrl+Z    ┃   ┃ Print Screen┃    Left     ┃    Down     ┃     Up      ┃    Right    ┃           ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
 // ┃  swap     ┃ vim last Y  ┃  alt+F4     ┃ alt+ctrl+gui┃  osm RALT   ┃   ctrl+Y    ┃   ┃   Pause     ┃   Page Up   ┃   Page Down ┃             ┃  Context Men┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -651,7 +514,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &kp LC(FR_A)  &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)  &vim_syst_clip    &kp INS       &kp HOME      &kp END        XXX           XXX
-    ___         &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(FR_Z)      &kp PSCRN     &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT      XXX
+     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(FR_Z)      &kp PSCRN     &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT      XXX
     &sl_togNavM &vim_last_yank &kp LA(F4)   &kp LA(LC(LGUI)) &sk RALT   &kp LC(FR_Y)      &kp PAUSE_BREAK &kp PG_UP   &kp PG_DN      XXX          &kp K_APP      &sl_togNavM
                                              ___           ___           ___               ___           ___           ___
         >;
@@ -724,28 +587,6 @@ bindings = <
 
 mouse_layer {
 display-name= "MOUSE";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃  Mouse Btn4 ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃  Mouse Btn 5┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃             ┃             ┃             ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃   ___       ┃    ___      ┃     ___     ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-bindings = <
-
-// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
-
-                 XXX          &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)   XXX              &mkp MB4      &msc SCRL_UP  &mmv MOVE_UP  &msc SCRL_DOWN  XXX
-     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp ESC          &mkp MB5       &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT  XXX       ___
-     ___         XXX          &kp RALT      XXX           XXX           XXX                XXX          &msc SCRL_LEFT  XXX          &msc SCRL_RIGHT  XXX        ___
-                                            &kp DEL       &kp BSPC      &kp RET           &mkp LCLK     &mkp MCLK     &mkp RCLK
-                        >;
-                };
-
-mouse_tp_layer {
-display-name= "MOUSE_TP";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
 //             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓

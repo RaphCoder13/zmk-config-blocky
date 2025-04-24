@@ -180,48 +180,15 @@
     // ZMK_MOD_MORPH(m_supM, bindings = <&kp FR_M>, <&kp FR_M>; mods = <(MOD_LSFT|MOD_RSFT)>; )
 
 
-    // Macros pour les lettres accentuées minuscules et majuscules
-    ZMK_MACRO(fr_a_circ, bindings = <&kp FR_CARET &kp FR_A>;)
-    ZMK_MACRO(fr_e_circ, bindings = <&kp FR_CARET &kp FR_E>;)
-    ZMK_MACRO(fr_i_circ, bindings = <&kp FR_CARET &kp FR_I>;)
-    ZMK_MACRO(fr_o_circ, bindings = <&kp FR_CARET &kp FR_O>;)
-    ZMK_MACRO(fr_u_circ, bindings = <&kp FR_CARET &kp FR_U>;)
-
-    ZMK_MACRO(fr_a_trem, bindings = <&kp LS(FR_CARET) &kp FR_A>;)
-    ZMK_MACRO(fr_e_trem, bindings = <&kp LS(FR_CARET) &kp FR_E>;)
-    ZMK_MACRO(fr_i_trem, bindings = <&kp LS(FR_CARET) &kp FR_I>;)
-    ZMK_MACRO(fr_o_trem, bindings = <&kp LS(FR_CARET) &kp FR_O>;)
-    ZMK_MACRO(fr_u_trem, bindings = <&kp LS(FR_CARET) &kp FR_U>;)
-
-
-    ZMK_MACRO(fr_A_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_A)>;)
-    ZMK_MACRO(fr_E_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_E)>;)
-    ZMK_MACRO(fr_I_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_I)>;)
-    ZMK_MACRO(fr_O_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_O)>;)
-    ZMK_MACRO(fr_U_trem, bindings = <&kp LS(FR_CARET) &kp LS(FR_U)>;)
-
-    ZMK_MACRO(fr_A_circ, bindings = <&kp FR_CARET &kp LS(FR_A)>;)
-    ZMK_MACRO(fr_E_circ, bindings = <&kp FR_CARET &kp LS(FR_E)>;)
-    ZMK_MACRO(fr_I_circ, bindings = <&kp FR_CARET &kp LS(FR_I)>;)
-    ZMK_MACRO(fr_O_circ, bindings = <&kp FR_CARET &kp LS(FR_O)>;)
-    ZMK_MACRO(fr_U_circ, bindings = <&kp FR_CARET &kp LS(FR_U)>;)
-
-    // Majuscules existantes
-    ZMK_MACRO(fr_A_grave, bindings = <&kp FR_GRAVE &kp LS(FR_A)>;)
-    ZMK_MACRO(fr_E_grave, bindings = <&kp FR_GRAVE &kp LS(FR_E)>;)
-    ZMK_MACRO(fr_U_grave, bindings = <&kp FR_GRAVE &kp LS(FR_U)>;)
+    // Mod-morph pour passer des accents FR-OSS à unicode
+    // ZMK_MOD_MORPH(accent_oss_uc, bindings = <&sl ACCENT>, <&sl UC_ACCENT>; mods = <(MOD_RGUI)>;)
 
     // Majuscules pour les accents des touches existantes en mode FR_OSS
-    ZMK_MOD_MORPH(fr_a_graveM,  bindings = <&kp FR_A_GRAVE>, <&fr_A_grave>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(fr_e_graveM,  bindings = <&kp FR_E_GRAVE>, <&fr_E_grave>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+    ZMK_MOD_MORPH(fr_a_graveM,  bindings = <&kp FR_A_GRAVE>, <&kp RA(LS(FR_A_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+    ZMK_MOD_MORPH(fr_e_graveM,  bindings = <&kp FR_E_GRAVE>, <&kp RA(LS(FR_E_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
     ZMK_MOD_MORPH(fr_e_acuteM,  bindings = <&kp FR_E_ACUTE>, <&kp RA(LS(FR_E_ACUTE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
     ZMK_MOD_MORPH(fr_c_cedillaM,bindings = <&kp FR_C_CEDILLA>, <&kp RA(LS(FR_C_CEDILLA))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    ZMK_MOD_MORPH(fr_u_graveM,  bindings = <&kp FR_U_GRAVE>, <&fr_U_grave>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_a_graveM,  bindings = <&kp FR_A_GRAVE>, <&kp RA(LS(FR_A_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_e_graveM,  bindings = <&kp FR_E_GRAVE>, <&kp RA(LS(FR_E_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_e_acuteM,  bindings = <&kp FR_E_ACUTE>, <&kp RA(LS(FR_E_ACUTE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_c_cedillaM,bindings = <&kp FR_C_CEDILLA>, <&kp RA(LS(FR_C_CEDILLA))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // ZMK_MOD_MORPH(fr_u_graveM,  bindings = <&kp FR_U_GRAVE>, <&kp RA(LS(FR_U_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+    ZMK_MOD_MORPH(fr_u_graveM,  bindings = <&kp FR_U_GRAVE>, <&kp RA(LS(FR_U_GRAVE))>; mods = <(MOD_LSFT|MOD_RSFT)>;)
 
     // Gestion accents et majuscules en mode unicode
     UC_MACRO(u_fr_a_graveM ,    &kp KP_N0 &kp KP_N1 &kp KP_N9 &kp KP_N2)  // à(0224)/À(0192)
@@ -561,13 +528,8 @@ display-name= "ACCENT";
 bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-    //             &kp RA(FR_Z)  &kp RA(K)     &kp RA(I)      &kp RA(U)     &kp FR_SQT        &kp RA(O)     XXX          &kp RA(P)             &kp FR_UMLAUT         &kp RA(LS(FR_EQUAL))
-    //  ___        &fr_a_graveM  &kp RA(D)     &kp RA(R)      &kp DQT       &and_pipe         &kp RA(G)     &fr_e_acuteM &fr_e_graveM          &kp FR_MU             &fr_u_graveM    ___
-    //  ___        &kp RA(FR_A)  &kp FR_EURO   &fr_c_cedillaM &kp FR_CARET  &kp FR_BSLH       &kp RA(FR_W)  &kp RA(FR_X) &kp LS(RA(FR_MINUS))  &kp LS(RA(FR_COMMA))  &kp FR_EXCL    ___
-    //                                         &kp RA(SPACE)  &kp RA(G)      ___               ___           ___           ___
-
-                &fr_a_circ    &fr_i_trem    &fr_i_circ     &fr_u_circ    &kp FR_SQT        &kp RA(O)     XXX          &fr_o_circ            &kp FR_UMLAUT         &kp RA(LS(FR_EQUAL))
-     ___        &fr_a_graveM  &fr_e_trem    &fr_e_circ     &kp DQT       &and_pipe         &kp RA(G)     &fr_e_acuteM &fr_e_graveM          &kp FR_MU             &fr_u_graveM    ___
+                &kp RA(FR_Z)  &kp RA(K)     &kp RA(I)      &kp RA(U)     &kp FR_SQT        &kp RA(O)     XXX          &kp RA(P)             &kp FR_UMLAUT         &kp RA(LS(FR_EQUAL))
+     ___        &fr_a_graveM  &kp RA(D)     &kp RA(R)      &kp DQT       &and_pipe         &kp RA(G)     &fr_e_acuteM &fr_e_graveM          &kp FR_MU             &fr_u_graveM    ___
      ___        &kp RA(FR_A)  &kp FR_EURO   &fr_c_cedillaM &kp FR_CARET  &kp FR_BSLH       &kp RA(FR_W)  &kp RA(FR_X) &kp LS(RA(FR_MINUS))  &kp LS(RA(FR_COMMA))  &kp FR_EXCL    ___
                                             &kp RA(SPACE)  &kp RA(G)      ___               ___           ___           ___
         >;
