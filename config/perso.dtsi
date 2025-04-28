@@ -1,0 +1,10 @@
+// Personnal informations
+// Dummy version for github
+
+
+ZMK_MACRO(macro_first_name, bindings=<&kp R>;)
+ZMK_MACRO(macro_last_name, bindings=<&kp R>;)
+ZMK_MACRO(macro_tel, bindings=<&kp R>;)
+ZMK_MACRO(macro_mail_free, bindings=<&kp R>;)
+ZMK_MACRO(macro_mail_gmail, bindings=<&kp R>;)
+ZMK_MACRO(macro_mail_cdl, bindings=<&kp R>;)
