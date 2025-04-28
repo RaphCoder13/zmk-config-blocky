@@ -28,24 +28,26 @@
 #define UC_ACCENT 3
 #define SYM 4
 #define NUMS 5
-#define NUMS_LOCK 6
-#define NAV 7
-#define NAV_M 8
-#define NAV_LOCK 9
-#define FUNCTION_L 10
-#define APPS 11
-#define MOUSE 12
-#define MOUSE_TP 13
-#define MOUSE_SCR 14
-#define EXCEL 15
-#define EXCEL_TEMP 16
-#define EXCEL_LOCK 17
-#define SNAKE 18
-#define CAMEL 19
-#define KEBAB 20
-#define PATH_CASE 21
-#define SLSH_CASE 22
+#define NAV 6
+#define NAV_M 7
+#define FUNCTION_L 8
+#define APPS 9
+#define MOUSE 10
+#define MOUSE_TP 11
+#define MOUSE_SCR 12
+#define EXCEL 13
+#define SNAKE 14
+#define CAMEL 15
+#define KEBAB 16
+#define PATH_CASE 17
+#define SLSH_CASE 18
 
+#define NUMS_TMP 19
+#define NUMS_LOCK 20
+#define NAV_TMP 21
+#define NAV_LOCK 22
+#define EXCEL_TMP 23
+#define EXCEL_LOCK 24
 
 #define HAS_MOUSE_KEYS
 #define HAS_MOUSE_TP
@@ -95,6 +97,11 @@
         require-prior-idle-ms = <1000>;
     };
 };
+
+&zip_scroll_scaler {
+    track-remainders;
+};
+
 &trackpoint_listener {
     input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_temp_layer MOUSE_TP 500 >;
     // input-processors = <&zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)>,<&zip_xy_transform (INPUT_TRANSFORM_X_INVERT)>,<&zip_temp_layer MOUSE 1000>;
@@ -113,7 +120,7 @@
 
 &sk {
     quick-release;
-    release-after-ms = <5000>;
+    release-after-ms = <1000>;
 };
 
 / {
@@ -308,18 +315,16 @@
     ZMK_COMBO(mo_mouse,  &smart_mouse,   LT2 LT3)
 
     // Locking num layer with toggle
-    ZMK_TAP_DANCE(lock_num, bindings=<&to NUMS>, <&tog NUMS>;tapping-term-ms=<300>;)
-    ZMK_COMBO(tog_num,    &lock_num,     RM5 RB5, NUMS)
-    ZMK_TAP_DANCE(lock_nav, bindings=<&to NAV>, <&tog NAV>;tapping-term-ms=<300>;)
-    ZMK_COMBO(tog_nav,    &lock_nav,     RM5 RB5, NAV)
-    // ZMK_COMBO(tog_nav,    &tog NAV_LOCK,     RM5 RB5, NAV)
-    // ZMK_COMBO(tog_num,    &tog NUMS_LOCK,    RM5 RB5, NUMS)
-    // ZMK_COMBO(tog_excel, &tog EXCEL_LOCK,    RM5 RB5, EXCEL)
+    ZMK_COMBO(tog_nav,   &tog NAV_LOCK,     RM5 RB5, NAV_TMP NAV_LOCK)
+    ZMK_COMBO(tog_num,   &tog NUMS_LOCK,    RM5 RB5, NUMS_TMP NUMS_LOCK)
+    ZMK_COMBO(tog_excel, &tog EXCEL_LOCK,   RM5 RB5, EXCEL_TMP EXCEL_LOCK)
 
-    // ZMK_CONDITIONAL_LAYER(num_lock, NUMS_LOCK, NUMS)
-    // ZMK_CONDITIONAL_LAYER(nav_lock, NAV_LOCK, NAV)
+    ZMK_CONDITIONAL_LAYER(nums_lock, NUMS_LOCK, NUMS)
+    ZMK_CONDITIONAL_LAYER(nums_temp, NUMS_TMP, NUMS)
+    ZMK_CONDITIONAL_LAYER(nav_lock, NAV_LOCK, NAV)
+    ZMK_CONDITIONAL_LAYER(nav_temp, NAV_TMP, NAV)
     ZMK_CONDITIONAL_LAYER(excel_lock, EXCEL_LOCK, EXCEL)
-    ZMK_CONDITIONAL_LAYER(excel_temp, EXCEL_TEMP, EXCEL)
+    ZMK_CONDITIONAL_LAYER(excel_temp, EXCEL_TMP, EXCEL)
 
     // Leader sequences
     // Rapha
@@ -369,7 +374,7 @@
     ZMK_TRI_STATE(
         smart_mouse, bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
         ignored-key-positions =
-            <LT1 LT2 LT3 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LH0 LH1 LH2 RT1 RT2 RT3 RM1 RM2 RM3 RB1 RB3 RH0 RH1 RH2>;
+            <LT1 LT2 LT3 LM0 LM1 LM2 LM3 LM4 LB0 LB1 LH0 LH1 LH2 RT1 RT2 RT3 RM1 RM2 RM3 RB1 RB3 RH0 RH1 RH2>;
         ignored-layers = <MOUSE NAV>;)
 
 / {
@@ -518,7 +523,7 @@ display-name= "BASE"                              ;
                 &kp FR_Q      &kp FR_Z      &kp F         &kp P         &kp B             &kp J         &kp L         &kp O         &sl UC_ACCENT    &kp FR_Y
 &td_shft_capw   &hml LGUI FR_A &hml LALT R  &hml LSHFT S  &hml LCTRL T  &kp G             &kp FR_M      &hmr RCTRL N  &hmr RSHFT E  &hmr LALT I   &hmr RGUI U   &under_qmark
   &sl_togBaseM  &kp FR_W      &kp X         &kp C         &hml RALT D   &kp V             &kp K         &hmr RALT H   &comma_semi   &dot_colon    &minus_slash  &sl_togBaseM
-                                &lt APPS ESC       &lt EXCEL_TEMP SPACE     &lt NAV TAB        &lt NUMS RET       &lt SYM BSPC      &lt FUNCTION_L DEL
+                                &lt APPS ESC       &lt EXCEL_TMP SPACE     &lt NAV_TMP TAB        &lt NUMS_TMP RET       &lt SYM BSPC      &lt FUNCTION_L DEL
             >;
     };
 
@@ -630,15 +635,7 @@ bindings = <
         >;
     };
 
-num_lock_layer {
-    display-name= "NUMS_LOCK";
-    bindings = <
-                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___           ___           ___               ___         ___           ___
-        >;
-    };
+
 
 navigation_layer {
 display-name= "NAVIGATION";
@@ -681,16 +678,6 @@ bindings = <
                                              ___           ___           ___               ___           ___           ___
         >;
 };
-
-nav_lock_layer {
-    display-name= "NAV_LOCK";
-    bindings = <
-                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___           ___           ___               ___         ___           ___
-        >;
-    };
 
 function_layer {
 display-name= "FUNCTION";
@@ -816,29 +803,11 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     &kp F2            &kp KP_SLASH  &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_MINUS
-     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LS(G)         &kp KP_N0     &kp KP_N4     &kp KP_N5     &kp KP_N6     &kp KP_PLUS    ___
-     ___        &tog EXCEL_LOCK &kp LC(FR_X)  &kp LC(FR_C)  &kp RALT      &kp LC(FR_V)      &kp KP_ASTERISK &kp KP_N1   &kp KP_N2     &kp KP_N3     &kp KP_DOT     ___
+     ___        &skl LGUI     &sk LALT      &sk LSHFT     &sk LCTRL     &kp LS(G)         &kp KP_N0     &kp KP_N4     &kp KP_N5     &kp KP_N6     &kp KP_PLUS    ___
+     ___        XXX           &kp LC(FR_X)  &kp LC(FR_C)  &kp RALT      &kp LC(FR_V)      &kp KP_ASTERISK &kp KP_N1   &kp KP_N2     &kp KP_N3     &kp KP_DOT     ___
                                              ___           ___           ___               ___           ___           ___
                         >;
                 };
-excel_temp_layer {
-    display-name= "EXCEL_TEMP";
-    bindings = <
-                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___           ___           ___               ___         ___           ___
-        >;
-    };
-excel_lock_layer {
-    display-name= "EXCEL_LOCK";
-    bindings = <
-                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___           ___           ___               ___         ___           ___
-        >;
-    };
 
 snake_layer {
 display-name= "SNAKE";
@@ -893,6 +862,63 @@ bindings = <
                                              ___           &ak_slash     &mo EXCEL         ___         ___           ___
                         >;
                 };
+
+num_temp_layer {
+    display-name= "NUMS_TMP";
+    bindings = <
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+        >;
+    };
+num_lock_layer {
+    display-name= "NUMS_LOCK";
+    bindings = <
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+        >;
+    };
+nav_temp_layer {
+    display-name= "NAV_TMP";
+    bindings = <
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+        >;
+    };
+
+nav_lock_layer {
+    display-name= "NAV_LOCK";
+    bindings = <
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+        >;
+    };
+
+excel_temp_layer {
+    display-name= "EXCEL_TMP";
+    bindings = <
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+        >;
+    };
+excel_lock_layer {
+    display-name= "EXCEL_LOCK";
+    bindings = <
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+        >;
+    };
        };
 
 };

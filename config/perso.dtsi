@@ -2,9 +2,15 @@
 // Dummy version for github
 
 
+// Raphael
 ZMK_MACRO(macro_first_name, bindings=<&kp R>;)
+// Debeugny
 ZMK_MACRO(macro_last_name, bindings=<&kp R>;)
+// [redacted]
 ZMK_MACRO(macro_tel, bindings=<&kp R>;)
+// [redacted]
 ZMK_MACRO(macro_mail_free, bindings=<&kp R>;)
+// [redacted]
 ZMK_MACRO(macro_mail_gmail, bindings=<&kp R>;)
+// [redacted]
 ZMK_MACRO(macro_mail_cdl, bindings=<&kp R>;)
