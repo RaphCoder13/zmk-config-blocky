@@ -10,4 +10,5 @@
     #include "zmk-keyboards-blocky/boards/shields/blocky/blocky.dtsi"
 
 
-  layout: {dts_layout: blocky.dtsi, layout_name: blocky}
+  draw_config:
+    layout: {dts_layout: blocky.dtsi, layout_name: blocky}
