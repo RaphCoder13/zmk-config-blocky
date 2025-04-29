@@ -4,4 +4,4 @@
     - "zmk-keyboards-blocky/include"
 
   zmk_preamble: |
-    #include <blocky_keys.h>
+    #include "blocky_keys.h"
