@@ -1,4 +1,4 @@
-layout: {zmk_keyboard: blocky}
+layout: {zmk_keyboard: blocky, layout_name: physical_layout0}
 layers:
   BASE:
   - FR Q
