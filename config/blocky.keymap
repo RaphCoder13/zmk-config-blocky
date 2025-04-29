@@ -46,8 +46,10 @@
 #define NUMS_LOCK 20
 #define NAV_TMP 21
 #define NAV_LOCK 22
-#define EXCEL_TMP 23
-#define EXCEL_LOCK 24
+#define NAV_M_TMP 23
+#define NAV_M_LOCK 24
+#define EXCEL_TMP 25
+#define EXCEL_LOCK 26
 
 #define HAS_MOUSE_KEYS
 #define HAS_MOUSE_TP
@@ -60,7 +62,7 @@
 #ifdef HAS_MOUSE_TP
   // We store the trackpoint settings in a separate file
   // to make organization a little easier.
-  #include "../boards/shields/blocky/includes/mouse_tp.dtsi"
+  #include <mouse_tp.dtsi>
 #endif  // HAS_MOUSE_TP
 
 #define STICKY_TOGGLE(name, layer)           \
@@ -122,6 +124,17 @@
     quick-release;
     release-after-ms = <1500>;
 };
+
+
+    &num_word {
+        continue-list = <BSPC DEL
+            FR_N0 FR_N1 FR_N2 FR_N3 FR_N4 FR_N5 FR_N6 FR_N7 FR_N8 FR_N9
+            FR_DOT FR_COMMA FR_PLUS FR_MINUS FR_ASTRK FR_SLASH FR_EQUAL FR_RPAR FR_LPAR
+            KP_N1 KP_N2 KP_N3 KP_N4 KP_N5 KP_N6 KP_N7 KP_N8 KP_N9 KP_N0
+            KP_DOT KP_PLUS KP_MINUS KP_ASTERISK KP_SLASH
+            >;
+        ignore-modifiers;
+    };
 
 / {
     behaviors {
@@ -188,11 +201,9 @@
     ZMK_MOD_MORPH(comma_semi, bindings = <&kp FR_COMMA>, <&kp FR_SEMICOLON>; mods = <(MOD_LSFT|MOD_RSFT)>;)
     ZMK_MOD_MORPH(dot_colon, bindings = <&kp FR_DOT>, <&kp FR_COLON>; mods = <(MOD_LSFT|MOD_RSFT)>;)
     ZMK_MOD_MORPH(under_qmark, bindings = <&kp FR_UNDERSCORE>, <&kp FR_QUESTION>; mods = <(MOD_LSFT|MOD_RSFT)>;)
-    // Test pour caps_word pour FR_M
-    // ZMK_MOD_MORPH(m_supM, bindings = <&kp FR_M>, <&kp FR_M>; mods = <(MOD_LSFT|MOD_RSFT)>; )
-
 
     ZMK_MOD_MORPH(dead_caret, bindings= <&kp FR_CARET>, <&none>; mods = <(MOD_LSFT|MOD_RSFT)>;)
+
     // Macros pour les lettres accentuées minuscules et majuscules
     ZMK_MACRO(fr_a_circ, bindings = <&kp FR_CARET &kp FR_A>;)
     ZMK_MACRO(fr_e_circ, bindings = <&kp FR_CARET &kp FR_E>;)
@@ -285,6 +296,7 @@
     ZMK_MOD_MORPH(hash_tilde, bindings = <&kp FR_HASH>, <&kp FR_TILDE>; mods = <(MOD_LSFT|MOD_RSFT)>; )
     ZMK_MOD_MORPH(excl_sqr, bindings = <&kp FR_EXCL>, <&kp FR_SQUARE>; mods = <(MOD_LSFT|MOD_RSFT)>; )
     ZMK_MOD_MORPH(lpar_rpar, bindings = <&kp FR_LPAR>, <&kp FR_RPAR>; mods = <(MOD_LSFT|MOD_RSFT)>; )
+    ZMK_MOD_MORPH(lpar_semicol, bindings = <&kp FR_LPAR>, <&kp FR_SEMICOLON>; mods = <(MOD_LSFT|MOD_RSFT)>; )
     ZMK_MOD_MORPH(rpar_dqt, bindings = <&kp FR_RPAR>, <&kp FR_DQT>; mods = <(MOD_LSFT|MOD_RSFT)>; )
     ZMK_MOD_MORPH(equal_plus, bindings = <&kp FR_EQUAL>, <&kp FR_PLUS>; mods = <(MOD_LSFT|MOD_RSFT)>; )
     ZMK_MOD_MORPH(and_pipe, bindings = <&kp FR_AMPERSAND>, <&kp FR_PIPE>; mods = <(MOD_LSFT|MOD_RSFT)>; )
@@ -300,15 +312,20 @@
     ZMK_MOD_MORPH(reset_bootloader, bindings=<&sys_reset>, <&bootloader>; mods = <(MOD_LSFT|MOD_RSFT)>;)
     ZMK_TAP_DANCE(td_reset, bindings=<&none>, <&none>, <&reset_bootloader>;)
 
+    // Macros
+    ZMK_MACRO(qu_macro, bindings=<&kp FR_Q &kp FR_U>;)
+    ZMK_MACRO(vim_syst_clip, bindings=<&kp FR_DQT &kp FR_PLUS>;)
+    ZMK_MACRO(vim_last_yank, bindings=<&kp FR_DQT &kp FR_N0>;)
+
 
     // Combos
-    ZMK_COMBO(qu, &qu_macro,  LT4 LT3, BASE BASE_M)
+    ZMK_COMBO(qu,        &qu_macro,     LT4 LT3, BASE BASE_M)
     ZMK_COMBO(td_colon,  &kp FR_COLON,  LM1 LB1, BASE BASE_M)
     ZMK_COMBO(sc_0,      &kp FR_N0,     LM2 LB2, BASE BASE_M)
 
     ZMK_COMBO(nh_circ,   &kp RA(FR_C_CEDILLA),  RM1 RB1, BASE BASE_M)
-    ZMK_COMBO(ecomm_dol, &kp FR_DOLLAR,  RM2 RB2, BASE BASE_M)
-    ZMK_COMBO(mn_semi,   &kp FR_SEMICOLON, RM0 RM1, BASE BASE_M)
+    ZMK_COMBO(ecomm_dol, &kp FR_DOLLAR,    RM2 RB2, BASE BASE_M)
+    // ZMK_COMBO(mn_semi,   &kp FR_SEMICOLON, RM0 RM1, BASE BASE_M)
 
     // Mouse layer access
     // ZMK_COMBO(mo_mouse,  &smart_mouse,   LM5 LB5)   // !not working (maybe because LB5 is not ignored)
@@ -323,13 +340,15 @@
     ZMK_CONDITIONAL_LAYER(nums_temp, NUMS_TMP, NUMS)
     ZMK_CONDITIONAL_LAYER(nav_lock, NAV_LOCK, NAV)
     ZMK_CONDITIONAL_LAYER(nav_temp, NAV_TMP, NAV)
+    ZMK_CONDITIONAL_LAYER(nav_m_lock, NAV_M_LOCK, NAV_M)
+    ZMK_CONDITIONAL_LAYER(nav_m_temp, NAV_M_TMP, NAV_M)
     ZMK_CONDITIONAL_LAYER(excel_lock, EXCEL_LOCK, EXCEL)
     ZMK_CONDITIONAL_LAYER(excel_temp, EXCEL_TMP, EXCEL)
 
     // Leader sequences
-    // Rapha
+    // ----------------
+    // Infos persos
     #include "perso.dtsi"
-
     ZMK_LEADER_SEQUENCE(first_name,    &macro_first_name, R P)
     ZMK_LEADER_SEQUENCE(last_name,   &macro_last_name, R D)
     ZMK_LEADER_SEQUENCE(telephone,  &macro_tel, R T)
@@ -338,7 +357,7 @@
     ZMK_LEADER_SEQUENCE(mail_gmail,  &macro_mail_gmail, R FR_M G)
     ZMK_LEADER_SEQUENCE(mail_cdl,   &macro_mail_cdl, R FR_M C)
 
-    // Case mods
+    // Case mods launches
     ZMK_LEADER_SEQUENCE(snake_mod,  &case_mod SNAKE, S)
     ZMK_LEADER_SEQUENCE(camel_mod,  &case_mod CAMEL, C)
     ZMK_LEADER_SEQUENCE(kebab_mod,  &case_mod KEBAB, K)
@@ -346,81 +365,37 @@
     ZMK_LEADER_SEQUENCE(slsh_mod,  &case_mod SLSH_CASE, FR_V)
     ZMK_LEADER_SEQUENCE(pascal_mod, &pascal_case, P)
     ZMK_LEADER_SEQUENCE(constant_mod, &constant_case, T)
-    ZMK_LEADER_SEQUENCE(numpad_numword, &num_word EXCEL, N)
-    ZMK_LEADER_SEQUENCE(numleft_numword, &num_word NUMS, FR_M)
+    ZMK_LEADER_SEQUENCE(numpad_numword, &num_word EXCEL_LOCK, N)
+    ZMK_LEADER_SEQUENCE(numleft_numword, &num_word NUMS_LOCK, FR_M)
 
-
-    &num_word {
-        continue-list = <BSPC DEL
-            FR_N0 FR_N1 FR_N2 FR_N3 FR_N4 FR_N5 FR_N6 FR_N7 FR_N8 FR_N9
-            FR_DOT FR_COMMA FR_PLUS FR_MINUS FR_ASTRK FR_SLASH FR_EQUAL FR_RPAR FR_LPAR
-            KP_N1 KP_N2 KP_N3 KP_N4 KP_N5 KP_N6 KP_N7 KP_N8 KP_N9 KP_N0
-            KP_DOT KP_PLUS KP_MINUS KP_ASTERISK KP_SLASH
-            >;
-        ignore-modifiers;
-    };
-
-
-
-
-    // Snake case with urob's zmk-auto-layer
-    ZMK_AUTO_LAYER(case_mod, ignore-alphas; ignore-numbers; ignore-modifiers;continue-list=<SPACE FR_UNDER FR_MINUS DEL BSPC LEFT RIGHT FR_BSLH FR_SLASH FR_M>;)
-    ZMK_MACRO(end_sep_mod, bindings=<&kp BSPC &kp SPACE>, <&to BASE>;)
-    ZMK_MACRO(end_camel, bindings=<&to BASE &kp SPACE>, <&to BASE>;)
+    // case mods with urob's zmk-auto-layer
     ZMK_MACRO(pascal_case, bindings=<&macro_tap &sk LSHFT>, <&case_mod CAMEL>;)
+    ZMK_AUTO_LAYER(case_mod, ignore-alphas; ignore-numbers; ignore-modifiers;continue-list=<SPACE FR_UNDER FR_MINUS DEL BSPC LEFT RIGHT FR_BSLH FR_SLASH FR_M>;)
     ZMK_MACRO(constant_case, bindings=<&caps_word>, <&case_mod SNAKE>;)
 
-// Smart-mouse, requires tri-state module.
+    // Change space to case mod separator with adaptive-key
+    ZMK_ADAPTIVE_KEY(ak_camel, bindings=<&sk LSHFT>; akt_shft {trigger-keys=<LSHFT>; bindings=<&end_camel>;};)
+    ZMK_ADAPTIVE_KEY(ak_snake, bindings=<&kp FR_UNDER>; akt_snake {trigger-keys=<FR_UNDER>; bindings=<&end_sep_mod>;};)
+    ZMK_ADAPTIVE_KEY(ak_kebab, bindings=<&kp FR_MINUS>; akt_kebab {trigger-keys=<FR_MINUS>; bindings=<&end_sep_mod>;};)
+    ZMK_ADAPTIVE_KEY(ak_bslh, bindings=<&kp FR_BSLH>; akt_bslh {trigger-keys=<FR_BSLH>; bindings=<&end_sep_mod>;};)
+    ZMK_ADAPTIVE_KEY(ak_slash, bindings=<&kp FR_SLASH>; akt_slash {trigger-keys=<FR_SLASH>; bindings=<&end_sep_mod>;};)
+
+    // Ending case mods after pressing space 2 times
+    ZMK_MACRO(end_sep_mod, bindings=<&kp BSPC &kp SPACE>, <&to BASE>;)
+    ZMK_MACRO(end_camel, bindings=<&to BASE &kp SPACE>, <&to BASE>;)
+
+
+    // Tap dance for shift/sticky shift/caps word/caps lock
+    ZMK_TAP_DANCE(td_shft_capw, bindings=<&sk LSHFT>, <&caps_word>, <&kp CAPS>; tapping-term-ms=<350>;)
+
+
+    // Smart-mouse, requires tri-state module.
     ZMK_TRI_STATE(
         smart_mouse, bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
         ignored-key-positions =
             <LT1 LT2 LT3 LM0 LM1 LM2 LM3 LM4 LB0 LB1 LH0 LH1 LH2 RT1 RT2 RT3 RM1 RM2 RM3 RB1 RB3 RH0 RH1 RH2>;
         ignored-layers = <MOUSE NAV>;)
 
-/ {
-    behaviors {
-        ak_camel: ak_camel {
-            compatible = "zmk,behavior-adaptive-key";
-            #binding-cells = <0>;
-            bindings = <&sk LSHFT>;
-
-
-            akt_shft {trigger-keys = <LSHFT>; bindings = <&end_camel>;};
-        };
-
-        ak_snake: ak_snake {
-            compatible = "zmk,behavior-adaptive-key";
-            #binding-cells = <0>;
-            bindings = <&kp FR_UNDER>;
-
-            akt_under {trigger-keys = <FR_UNDER>; bindings = <&end_sep_mod>;};
-        };
-
-        ak_kebab: ak_kebab {
-            compatible = "zmk,behavior-adaptive-key";
-            #binding-cells = <0>;
-            bindings = <&kp FR_MINUS>;
-
-            akt_kebab {trigger-keys = <FR_MINUS>; bindings = <&end_sep_mod>;};
-        };
-
-        ak_bslh: ak_bslh {
-            compatible = "zmk,behavior-adaptive-key";
-            #binding-cells = <0>;
-            bindings = <&kp FR_BSLH>;
-
-            akt_bslh {trigger-keys = <FR_BSLH>; bindings = <&end_sep_mod>;};
-        };
-
-        ak_slash: ak_slash {
-            compatible = "zmk,behavior-adaptive-key";
-            #binding-cells = <0>;
-            bindings = <&kp FR_SLASH>;
-
-            akt_slash {trigger-keys = <FR_SLASH>; bindings = <&end_sep_mod>;};
-        };
-    };
-};
 
 / {
     aliases {
@@ -435,6 +410,10 @@
 
 
     behaviors {
+        // Gestion swap hands pour layer BASE et NAV
+        STICKY_TOGGLE(sl_togBaseM, BASE_M);
+        STICKY_TOGGLE(sl_togNavM, NAV_M_TMP);
+
         t_off: toggle_layer_off {
             compatible = "zmk,behavior-toggle-layer";
             #binding-cells = <1>;
@@ -442,63 +421,8 @@
             toggle-mode = "off";
         };
 
-
-        ht_sk: hold_tap_sticky {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&mt>, <&sk>;
-        };
-
-        td_shft_capw: td_shft_capw {
-            display-name = "Shift/Caps Word";
-            #binding-cells = <0>;
-            compatible = "zmk,behavior-tap-dance";
-            bindings = <&sk LSHIFT>, <&caps_word>, <&kp CAPS>;
-            tapping-term-ms = <350>;
-        };
-            // bindings = <&ht_sk LSHIFT LSHIFT>, <&caps_word>, <&kp CAPS>;
-
-
-        STICKY_TOGGLE(sl_togBaseM, BASE_M);
-        STICKY_TOGGLE(sl_togNavM, NAV_M);
-
     };
 
-
-
-    macros {
-
-        qu_macro: qu_macro {
-            display-name = "qu";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp FR_Q>, <&kp FR_U>;
-        };
-        vim_syst_clip: vim_syst_clip {
-            display-name = "vim paste";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp FR_DQT>
-                , <&macro_tap &kp FR_PLUS>
-                ;
-        };
-
-        vim_last_yank: vim_last_yank {
-            display-name = "vim last yank";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp FR_DQT>
-                , <&macro_tap &kp FR_N0>
-                , <&macro_tap &kp FR_P>
-                ;
-        };
-
-
-    };
 
         keymap {
                 compatible = "zmk,keymap";
@@ -546,7 +470,7 @@ display-name= "BASE_M"                              ;
                 &kp FR_Y      &sl UC_ACCENT    &kp O         &kp L         &kp J             &kp B         &kp P         &kp F         &kp FR_Z      &kp FR_Q
    &under_qmark &hml RGUI U   &hml LALT I   &hml RSHFT E  &hml RCTRL N  &kp FR_M          &kp G         &hmr LCTRL T  &hmr LSHFT S  &hmr LALT R   &hmr LGUI FR_A &td_shft_capw
   &t_off BASE_M &minus_slash  &dot_colon    &comma_semi   &hml RALT H   &kp K             &kp V         &hmr RALT D   &kp C         &kp X         &kp FR_W      &t_off BASE_M
-                                &lt FUNCTION_L DEL   &lt SYM BSPC      &lt EXCEL RET       &lt NAV TAB     &lt NUMS SPACE     &lt APPS ESC
+                                &lt FUNCTION_L DEL   &lt SYM BSPC      &lt EXCEL_TMP RET       &lt NAV_TMP TAB     &lt NUMS_TMP SPACE     &lt APPS ESC
             >;
     };
 
@@ -608,7 +532,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &at_mu        &pct_minus    &lt_apos      &gt_grave     &sqt_dqt          &kp FR_DQT    &kp FR_LBKT   &kp FR_RBKT   &sk RALT     XXX
-     ___        &hash_tilde   &excl_sqr     &lpar_rpar    &rpar_dqt     &equal_plus       &kp FR_GRAVE  &sknq RCTRL   &td_shft_capw &sk LALT     &skl RGUI       ___
+     ___        &hash_tilde   &excl_sqr     &lpar_semicol &rpar_dqt     &equal_plus       &kp FR_GRAVE  &sknq RCTRL   &td_shft_capw &sk LALT     &skl RGUI       ___
      ___        &kp FR_CARET  &and_pipe     &aster_fslh   &bslh_deg     &doll_pnd         &kp FR_SQT    &kp FR_LBRC   &kp FR_RBRC   &kp FR_SEMICOLON XXX         ___
                                              ___          &leader        ___               ___           ___           ___
         >;
@@ -790,9 +714,9 @@ bindings = <
 excel_layer {
 display-name= "EXCEL";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃    Left     ┃   Down      ┃     Up      ┃    Right    ┃     F2      ┃   ┃     +       ┃     7       ┃     8       ┃     9       ┃     -       ┃
+//             ┃    Left     ┃   Down      ┃     Up      ┃    Right    ┃     F2      ┃   ┃     /       ┃     7       ┃     8       ┃     9       ┃     -       ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃   Shift+G   ┃   ┃     0       ┃     4       ┃     5       ┃     6       ┃     +       ┃    /      ┃
+// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃   Shift+G   ┃   ┃     0       ┃     4       ┃     5       ┃     6       ┃     +       ┃           ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
 // ┃  swap     ┃             ┃   Cut       ┃    Copy     ┃  osm RALT   ┃   Paste     ┃   ┃     *       ┃     1       ┃     2       ┃     3       ┃     .       ┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -893,6 +817,25 @@ nav_temp_layer {
 
 nav_lock_layer {
     display-name= "NAV_LOCK";
+    bindings = <
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+        >;
+    };
+nav_m_temp_layer {
+    display-name= "NAV_M_TMP";
+    bindings = <
+                 ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+        >;
+    };
+
+nav_m_lock_layer {
+    display-name= "NAV_M_LOCK";
     bindings = <
                  ___           ___           ___           ___           ___               ___         ___           ___           ___           ___
      ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
