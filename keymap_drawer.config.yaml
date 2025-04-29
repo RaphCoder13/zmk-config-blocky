@@ -7,4 +7,4 @@
   zmk_preamble: |
     #include "blocky_keys.h"
 
-  layout: {dts_layout: blocky.dtsi}
+  layout: {dts_layout: blocky.dtsi, layout_name: blocky}
