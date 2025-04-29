@@ -6,7 +6,7 @@ on:
     paths:
       - "config/blocky.keymap"
       - "config/*.dtsi"
-      - "keymap_drawer.config.yaml"
+      - "keymap-drawer/keymap_drawer.config.yaml"
       # - 'boards/*/*/*.keymap'
 
 jobs:
