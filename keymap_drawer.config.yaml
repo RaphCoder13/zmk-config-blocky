@@ -1,6 +1,7 @@
  parse_config:
   zmk_additional_includes:
     - "zmk-helpers/include"
+    - "zmk-keyboards-blocky/include"
 
   zmk_preamble: |
     #include "blocky_keys.h"
