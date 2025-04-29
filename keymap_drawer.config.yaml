@@ -2,3 +2,6 @@
   zmk_additional_includes:
     - "zmk-helpers/include"
     - "zmk-keyboards-blocky/include"
+
+  zmk_preamble: |
+    #include <zmk-keyboards-blocky/include/blocky_keys.h>
