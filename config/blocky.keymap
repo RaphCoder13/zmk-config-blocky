@@ -23,55 +23,6 @@
 #define ___ &trans
 
 
-#define LT0  4  // left-top row
-#define LT1  3
-#define LT2  2
-#define LT3  1
-#define LT4  0
-
-#define RT0  5  // right-top row
-#define RT1  6
-#define RT2  7
-#define RT3  8
-#define RT4  9
-
-#define LM0 15  // left-middle row
-#define LM1 14
-#define LM2 13
-#define LM3 12
-#define LM4 11
-#define LM5 10
-
-#define RM0 16  // right-middle row
-#define RM1 17
-#define RM2 18
-#define RM3 19
-#define RM4 20
-#define RM5 21
-
-#define LB0 27  // left-bottom row
-#define LB1 26
-#define LB2 25
-#define LB3 24
-#define LB4 23
-#define LB5 22
-
-#define RB0 28  // right-bottom row
-#define RB1 29
-#define RB2 30
-#define RB3 31
-#define RB4 32
-#define RB5 33
-
-#define LH0 36  // left thumb keys
-#define LH1 35
-#define LH2 34
-
-#define RH0 37  // right thumb keys
-#define RH1 38
-#define RH2 39
-
-
 #define BASE 0
 #define BASE_M 1
 #define ACCENT_OSS 2
@@ -100,46 +51,6 @@
 #define NAV_M_LOCK 24
 #define EXCEL_TMP 25
 #define EXCEL_LOCK 26
-
-  // How sensitive the trackpoint is
-  #define U_MSS_TP_S_I &mms MS_TP_SENSITIVITY_INCR
-  #define U_MSS_TP_S_D &mms MS_TP_SENSITIVITY_DECR
-
-
-  // The maximum speed the trackpoint will accelerate to
-  #define U_MSS_TP_V6_I &mms MS_TP_VALUE6_INCR
-  #define U_MSS_TP_V6_D &mms MS_TP_VALUE6_DECR
-
-
-  // I am not quite sure tbh... default seems fine.
-  #define U_MSS_TP_NI_I &mms MS_TP_NEG_INERTIA_INCR
-  #define U_MSS_TP_NI_D &mms MS_TP_NEG_INERTIA_DECR
-
-
-  // How hard you have to press to activate the "Press To Select" feature that
-  // lets you tap or press on the trackpoint to click.
-  //
-  // Not all trackpoints support it and you have to enable
-  // `tp-press-to-select;` in `&mouse_ps2` first.
-  #define U_MSS_TP_PT_I &mms MS_TP_PTS_THRESHOLD_INCR
-  #define U_MSS_TP_PT_D &mms MS_TP_PTS_THRESHOLD_DECR
-
-
-  // If you mess up the settings, you can use this key code to clear the
-  // settings from flash and re-set the default values on the TP.
-  //
-  // Make sure to wait at least CONFIG_ZMK_SETTINGS_SAVE_DEBOUNCE seconds (60
-  // by default) before restarting the board to ensure the settings are
-  // written to flash storage.
-  #define U_MSS_RESET   &mms MS_RESET
-
-
-  // If you prefer to set the settings in `&mouse_ps2`, you can use the key
-  // codes above to find the settings you like the most and then press this
-  // key code to output the settings to the log.
-  //
-  // Then you can add those values to `&mouse_ps2`
-  #define U_MSS_LOG     &mms MS_LOG
 
 
 #define HAS_MOUSE_KEYS
