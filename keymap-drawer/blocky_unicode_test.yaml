@@ -1,0 +1,699 @@
+layout: {zmk_keyboard: blocky_unicode_test}
+layers:
+  BASE:
+  - FR Q
+  - FR Z
+  - F
+  - P
+  - B
+  - J
+  - L
+  - O
+  - {t: ACCENT, h: sticky}
+  - FR Y
+  - '&td_shft_capw'
+  - '&hml LGUI FR_A'
+  - '&hml LALT R'
+  - '&hml LSHFT S'
+  - '&hml LCTRL T'
+  - G
+  - FR M
+  - '&hmr RCTRL N'
+  - '&hmr RSHFT E'
+  - '&hmr LALT I'
+  - '&hmr RGUI U'
+  - '&under_qmark'
+  - '&sl_togBaseM'
+  - FR W
+  - X
+  - C
+  - '&hml RALT D'
+  - V
+  - K
+  - '&hmr RALT H'
+  - '&comma_semi'
+  - '&dot_colon'
+  - '&minus_slash'
+  - '&sl_togBaseM'
+  - {t: ESC, h: APPS}
+  - {t: SPACE, h: EXCEL}
+  - {t: TAB, h: NAVIGATION}
+  - {t: RET, h: NUMBER}
+  - {t: BSPC, h: SYMBOL}
+  - {t: DEL, h: FUNCTION}
+  BASE_M:
+  - FR Y
+  - {t: ACCENT, h: sticky}
+  - O
+  - L
+  - J
+  - B
+  - P
+  - F
+  - FR Z
+  - FR Q
+  - '&under_qmark'
+  - '&hml RGUI U'
+  - '&hml LALT I'
+  - '&hml RSHFT E'
+  - '&hml RCTRL N'
+  - FR M
+  - G
+  - '&hmr LCTRL T'
+  - '&hmr LSHFT S'
+  - '&hmr LALT R'
+  - '&hmr LGUI FR_A'
+  - '&td_shft_capw'
+  - '&t_off 1'
+  - '&minus_slash'
+  - '&dot_colon'
+  - '&comma_semi'
+  - '&hml RALT H'
+  - K
+  - V
+  - '&hmr RALT D'
+  - C
+  - X
+  - FR W
+  - '&t_off 1'
+  - {t: DEL, h: FUNCTION}
+  - {t: BSPC, h: SYMBOL}
+  - {t: RET, h: EXCEL}
+  - {t: TAB, h: NAVIGATION}
+  - {t: SPACE, h: NUMBER}
+  - {t: ESC, h: APPS}
+  ACCENT:
+  - '&fr_a_circumflex'
+  - '&fr_i_diaeresis'
+  - '&fr_i_circumflex'
+  - '&fr_u_circumflex'
+  - FR SQT
+  - '&fr_oe'
+  - ''
+  - '&fr_o_circumflex'
+  - {t: FR UMLAUT, type: held}
+  - '&plus_minus'
+  - {t: ▽, type: trans}
+  - '&fr_a_grave'
+  - '&fr_e_diaeresis'
+  - '&fr_e_circumflex'
+  - '"'
+  - '&and_pipe'
+  - '&fr_apostrophe'
+  - '&fr_e_acute'
+  - '&fr_e_grave'
+  - FR MU
+  - '&fr_u_grave'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&fr_ae'
+  - FR EURO
+  - '&fr_c_cedilla'
+  - FR CARET
+  - FR BSLH
+  - '&fr_daqleft'
+  - '&fr_daqright'
+  - '&fr_tiret_quad'
+  - '&fr_ellipsis'
+  - FR EXCL
+  - {t: ▽, type: trans}
+  - AltGr+SPACE
+  - '&fr_apostrophe'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  SYMBOL:
+  - '&at_mu'
+  - '&pct_minus'
+  - '&lt_apos'
+  - '&gt_grave'
+  - '&sqt_dqt'
+  - FR DQT
+  - FR LBKT
+  - FR RBKT
+  - '&case_mod 13'
+  - '&case_mod 12'
+  - {t: ▽, type: trans}
+  - '&hash_tilde'
+  - '&excl_sqr'
+  - '&lpar_rpar'
+  - '&rpar_dqt'
+  - '&equal_plus'
+  - FR GRAVE
+  - {t: RCTRL, h: sticky}
+  - '&td_shft_capw'
+  - {t: LALT, h: sticky}
+  - {t: RGUI, h: sticky}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - FR CARET
+  - '&and_pipe'
+  - '&aster_fslh'
+  - '&bslh_deg'
+  - '&doll_pnd'
+  - FR SQT
+  - FR LBRC
+  - FR RBRC
+  - {t: RALT, h: sticky}
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&leader'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  NUMBER:
+  - FR SLASH
+  - FR 7
+  - FR 8
+  - FR 9
+  - FR MINUS
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - '&kp_l_r_par'
+  - FR 0
+  - FR 4
+  - FR 5
+  - FR 6
+  - FR PLUS
+  - ''
+  - {t: RCTRL, h: sticky}
+  - {t: RSHFT, h: sticky}
+  - {t: LALT, h: sticky}
+  - {t: RGUI, h: sticky}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - FR ASTRK
+  - FR 1
+  - FR 2
+  - FR 3
+  - FR EQUAL
+  - ''
+  - {t: RALT, h: sticky}
+  - ''
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - FR DOT
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  NAVIGATION:
+  - Ctl+FR A
+  - Ctl+FR X
+  - Ctl+FR C
+  - Ctl+FR V
+  - '&vim_syst_clip'
+  - INS
+  - HOME
+  - END
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - {t: LGUI, h: sticky}
+  - {t: LALT, h: sticky}
+  - {t: LSHFT, h: sticky}
+  - {t: LCTRL, h: sticky}
+  - Ctl+FR Z
+  - PSCRN
+  - LEFT
+  - DOWN
+  - UP
+  - RIGHT
+  - ''
+  - '&sl_togNavM'
+  - '&vim_last_yank'
+  - Alt+F4
+  - Alt+Ctl+LGUI
+  - {t: RALT, h: sticky}
+  - Ctl+FR Y
+  - PAUSE BREAK
+  - PG UP
+  - PG DN
+  - ''
+  - APP
+  - '&sl_togNavM'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  NAVIGATION_M:
+  - ''
+  - ''
+  - END
+  - HOME
+  - INS
+  - '&vim_syst_clip'
+  - Ctl+FR V
+  - Ctl+FR C
+  - Ctl+FR X
+  - Ctl+FR A
+  - ''
+  - RIGHT
+  - UP
+  - DOWN
+  - LEFT
+  - PSCRN
+  - Ctl+FR Z
+  - {t: LCTRL, h: sticky}
+  - {t: LSHFT, h: sticky}
+  - {t: LALT, h: sticky}
+  - {t: LGUI, h: sticky}
+  - {t: ▽, type: trans}
+  - '&t_off 6'
+  - APP
+  - ''
+  - PG DN
+  - PG UP
+  - PAUSE BREAK
+  - Ctl+FR Y
+  - {t: RALT, h: sticky}
+  - Alt+Ctl+LGUI
+  - Alt+F4
+  - '&vim_last_yank'
+  - '&t_off 6'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  FUNCTION:
+  - F12
+  - F7
+  - F8
+  - F9
+  - SLCK
+  - INS
+  - ''
+  - MUTE
+  - VOL DN
+  - VOL UP
+  - {t: ▽, type: trans}
+  - F11
+  - F4
+  - F5
+  - F6
+  - PSCRN
+  - KP NUM
+  - RCTRL
+  - RSHIFT
+  - LALT
+  - LGUI
+  - ''
+  - {t: ▽, type: trans}
+  - F10
+  - F1
+  - F2
+  - F3
+  - PAUSE BREAK
+  - ''
+  - RALT
+  - PREV
+  - PLAY PAUSE
+  - NEXT
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  APPS:
+  - {t: BT, h: '0'}
+  - {t: BT, h: '1'}
+  - {t: BT, h: '2'}
+  - {t: BT, h: '3'}
+  - BT CLR
+  - '&td_reset'
+  - Alt+L
+  - Ctl+FR SQUARE
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - LGUI
+  - LALT
+  - LSHIFT
+  - LCTRL
+  - '&td_reset'
+  - APP
+  - AL WWW
+  - ''
+  - Meh+T
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - OUT USB
+  - OUT BLE
+  - '&ind_bat'
+  - RALT
+  - '&ind_con'
+  - Meh+K
+  - Ctl+Alt+F
+  - AL CALC
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  MOUSE:
+  - ''
+  - Ctl+FR X
+  - Ctl+FR C
+  - Ctl+FR V
+  - ''
+  - ''
+  - '&msc SCRL_UP'
+  - '&mmv MOVE_UP'
+  - '&msc SCRL_DOWN'
+  - ''
+  - {t: ▽, type: trans}
+  - {t: LGUI, h: sticky}
+  - {t: LALT, h: sticky}
+  - {t: LSHFT, h: sticky}
+  - {t: LCTRL, h: sticky}
+  - ESC
+  - ''
+  - '&mmv MOVE_LEFT'
+  - '&mmv MOVE_DOWN'
+  - '&mmv MOVE_RIGHT'
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - RALT
+  - MOUSE_SCROLL
+  - '&mkp MB4'
+  - '&mkp MB5'
+  - ''
+  - '&msc SCRL_LEFT'
+  - ''
+  - '&msc SCRL_RIGHT'
+  - ''
+  - {t: ▽, type: trans}
+  - '&mkp LCLK'
+  - '&mkp MCLK'
+  - '&mkp RCLK'
+  - '&mkp LCLK'
+  - '&mkp MCLK'
+  - '&mkp RCLK'
+  MOUSE_SCROLL:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  EXCEL:
+  - LEFT
+  - DOWN
+  - UP
+  - RIGHT
+  - F2
+  - KP SLASH
+  - KP 7
+  - KP 8
+  - KP 9
+  - KP MINUS
+  - {t: ▽, type: trans}
+  - {t: LGUI, h: sticky}
+  - {t: LALT, h: sticky}
+  - {t: LSHFT, h: sticky}
+  - {t: LCTRL, h: sticky}
+  - Sft+G
+  - KP 0
+  - KP 4
+  - KP 5
+  - KP 6
+  - KP PLUS
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - Ctl+FR X
+  - Ctl+FR C
+  - RALT
+  - Ctl+FR V
+  - KP ASTERISK
+  - KP 1
+  - KP 2
+  - KP 3
+  - KP DOT
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {type: held}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  SNAKE:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&ak_snake'
+  - EXCEL
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  CAMEL:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&ak_camel'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  KEBAB:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&ak_kebab'
+  - EXCEL
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  PATH_CASE:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&ak_bslh'
+  - EXCEL
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  SLSH_CASE:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - '&ak_slash'
+  - EXCEL
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
