@@ -1,7 +1,4 @@
  parse_config:
+  preprocess: true
   zmk_additional_includes: ["zmk-helpers/include","zmk-keyboards-blocky/include","zmk-keyboards-blocky/boards/shields/blocky"]
-
-  zmk_preamble: |
-    #include "zmk-keyboards-blocky/include/blocky_keys.h"
-    #include "zmk-keyboards-blocky/include/mouse_tp.dtsi"
-    #include "zmk-keyboards-blocky/boards/shields/blocky/blocky.dtsi"
+  zmk_preamble: '#include "zmk-keyboards-blocky/include/blocky_keys.h"'
