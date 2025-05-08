@@ -319,19 +319,18 @@
     ZMK_MACRO(vim_syst_clip, bindings=<&kp FR_DQT &kp FR_PLUS>;)
     ZMK_MACRO(vim_last_yank, bindings=<&kp FR_DQT &kp FR_N0>;)
 
-
     // Combos
-    ZMK_COMBO(qu,        &qu_macro,     LT4 LT3, BASE BASE_M)
-    ZMK_COMBO(td_colon,  &kp FR_COLON,  LM1 LB1, BASE BASE_M)
-    ZMK_COMBO(sc_0,      &kp FR_N0,     LM2 LB2, BASE BASE_M)
+    ZMK_COMBO(qu,        &qu_macro,     LT4 LT3, BASE)
+    ZMK_COMBO(td_colon,  &kp FR_COLON,  LM1 LB1, BASE )
+    ZMK_COMBO(sc_0,      &kp FR_N0,     LM2 LB2, BASE )
 
-    ZMK_COMBO(nh_circ,   &kp RA(FR_C_CEDILLA),  RM1 RB1, BASE BASE_M)
-    ZMK_COMBO(ecomm_dol, &kp FR_DOLLAR,    RM2 RB2, BASE BASE_M)
+    ZMK_COMBO(nh_circ,   &kp RA(FR_C_CEDILLA),  RM1 RB1, BASE )
+    ZMK_COMBO(ecomm_dol, &kp FR_DOLLAR,    RM2 RB2, BASE )
     // ZMK_COMBO(mn_semi,   &kp FR_SEMICOLON, RM0 RM1, BASE BASE_M)
 
     // Mouse layer access
     // ZMK_COMBO(mo_mouse,  &smart_mouse,   LM5 LB5)   // !not working (maybe because LB5 is not ignored)
-    ZMK_COMBO(mo_mouse,  &smart_mouse,   LT2 LT3)
+    ZMK_COMBO(mo_mouse,  &smart_mouse,   LT2 LT3, BASE)
 
     // Locking num layer with toggle
     ZMK_COMBO(tog_nav,   &tog NAV_LOCK,     RM5 RB5, NAV_TMP NAV_LOCK)
@@ -545,7 +544,7 @@ bindings = <
     };
 
 num_layer {
-display-name= "NUMBER";
+display-name= "NUMBERS";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
 //             ┃     /       ┃     7       ┃     8       ┃     9       ┃     -       ┃   ┃             ┃             ┃             ┃             ┃             ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
