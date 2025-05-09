@@ -66,7 +66,7 @@ manifest:
       revision: main
     - name: zmk-keyboard-blocky
       remote: raphcoder13
-      revision: main
+      revision: dongle
     - name: zmk-helpers
       remote: urob
       revision: main
