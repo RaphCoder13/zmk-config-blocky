@@ -1,0 +1,11 @@
+// Personnal informations
+// Complete version for github
+
+
+// Raph
+ZMK_MACRO(macro_first_name, bindings=<&kp LS(FR_R)>;)
+ZMK_MACRO(macro_last_name, bindings=<&kp LS(FR_R)>;)
+ZMK_MACRO(macro_tel, bindings=<&kp FR_N0>;)
+ZMK_MACRO(macro_mail_free, bindings=<&kp FR_R>;)
+ZMK_MACRO(macro_mail_gmail, bindings=<&kp FR_R>;)
+ZMK_MACRO(macro_mail_cdl, bindings=<&kp FR_R>;)
