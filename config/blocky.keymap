@@ -398,7 +398,7 @@
     ZMK_TRI_STATE(
         smart_mouse, bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
         ignored-key-positions =
-            <LT1 LT2 LT3 LM0 LM1 LM2 LM3 LM4 LB0 LB1 LH0 LH1 LH2 RT0 RT1 RT2 RT3 RM0 RM1 RM2 RM3 RB1 RB3 RH0 RH1 RH2>;
+            <LT1 LT2 LT3 LM0 LM1 LM2 LM3 LM4 LB0 LB1 LH0 LH1 LH2 RT1 RT2 RT3 RM1 RM2 RM3 RB1 RB3 RH0 RH1 RH2>;
         ignored-layers = <MOUSE NAV>;)
 
 
@@ -575,7 +575,7 @@ display-name= "NAVIGATION";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
 //             ┃   ctrl+A    ┃   ctrl+X    ┃   ctrl+C    ┃   ctrl+V    ┃ vim syst cli┃   ┃   Insert    ┃    Home     ┃    End      ┃             ┃             ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃ osm LGUI    ┃  osm LALT   ┃  osm LSHFT  ┃  osm LCTRL  ┃   ctrl+Z    ┃   ┃ Print Screen┃    Left     ┃    Down     ┃     Up      ┃    Right    ┃           ┃
+// ┃ smartMouse┃ osm LGUI    ┃  osm LALT   ┃  osm LSHFT  ┃  osm LCTRL  ┃   ctrl+Z    ┃   ┃ Print Screen┃    Left     ┃    Down     ┃     Up      ┃    Right    ┃           ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
 // ┃  swap     ┃ vim last Y  ┃  alt+F4     ┃ alt+ctrl+gui┃  osm RALT   ┃   ctrl+Y    ┃   ┃   Pause     ┃   Page Up   ┃   Page Down ┃             ┃  Context Men┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
