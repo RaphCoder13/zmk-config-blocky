@@ -22,7 +22,8 @@ manifest:
       url-base: https://github.com/zzeneg
   projects:
     - name: zmk
-      remote: zmkfirmware
+      # remote: zmkfirmware
+      remote: badjeff
       revision: main
       import: app/west.yml
 
