@@ -479,7 +479,7 @@ display-name= "BASE_M"                              ;
                 &kp FR_Y      &sl UC_ACCENT    &kp O         &kp L         &kp J             &kp B         &kp P         &kp F         &kp FR_Z      &kp FR_Q
    &under_qmark &hml RGUI U   &hml LALT I   &hml RSHFT E  &hml RCTRL N  &kp FR_M          &kp G         &hmr LCTRL T  &hmr LSHFT S  &hmr LALT R   &hmr LGUI FR_A &td_shft_capw
   &t_off BASE_M &minus_slash  &dot_colon    &comma_semi   &hml RALT H   &kp K             &kp V         &hmr RALT D   &kp C         &kp X         &kp FR_W      &t_off BASE_M
-                                &lt FUNCTION_L DEL   &lt SYM BSPC      &lt EXCEL_TMP RET       &lt NAV_TMP TAB     &lt NUMS_TMP SPACE     &lt APPS ESC
+                                &lt FUNCTION_L DEL   &lt SYM BSPC      &lt NUMS_TMP RET       &lt NAV_TMP TAB     &lt EXCEL_TMP SPACE     &lt APPS ESC
             >;
     };
 
