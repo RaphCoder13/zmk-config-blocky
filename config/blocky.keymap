@@ -34,25 +34,25 @@
 #define NAV_M 7
 #define FUNCTION_L 8
 #define APPS 9
-#define MOUSE 10
-#define MOUSE_TP 11
-#define MOUSE_SCR 12
-#define EXCEL 13
-#define SNAKE 14
-#define CAMEL 15
-#define KEBAB 16
-#define PATH_CASE 17
-#define SLSH_CASE 18
+#define EXCEL 10
+#define SNAKE 11
+#define CAMEL 12
+#define KEBAB 13
+#define PATH_CASE 14
+#define SLSH_CASE 15
 
-#define NUMS_TMP 19
-#define NUMS_LOCK 20
-#define NAV_TMP 21
-#define NAV_LOCK 22
-#define NAV_M_TMP 23
-#define NAV_M_LOCK 24
-#define EXCEL_TMP 25
-#define EXCEL_LOCK 26
+#define NUMS_TMP 16
+#define NUMS_LOCK 17
+#define NAV_TMP 18
+#define NAV_LOCK 19
+#define NAV_M_TMP 20
+#define NAV_M_LOCK 21
+#define EXCEL_TMP 22
+#define EXCEL_LOCK 23
 
+#define MOUSE 24
+#define MOUSE_TP 25
+#define MOUSE_SCR 26
 
 #define HAS_MOUSE_KEYS
 #define HAS_MOUSE_TP
@@ -148,7 +148,7 @@
             compatible = "zmk,behavior-sticky-key";
             #binding-cells = <1>;
             bindings = <&kp>;
-            release-after-ms = <5000>;
+            release-after-ms = <2000>;
             lazy;
             ignore-modifiers;
         };
@@ -156,7 +156,7 @@
             compatible = "zmk,behavior-sticky-key";
             #binding-cells = <1>;
             bindings = <&kp>;
-            release-after-ms = <5000>;
+            release-after-ms = <2000>;
             lazy;
             quick-release;
             ignore-modifiers;
@@ -326,6 +326,7 @@
     // Combos
     ZMK_COMBO(qu,        &qu_macro,     LT4 LT3, BASE)
     ZMK_COMBO(td_colon,  &kp FR_COLON,  LM1 LB1, BASE )
+    ZMK_COMBO(tp_semicolon,  &kp FR_SEMICOLON,  LM1 LT1, BASE )
     ZMK_COMBO(sc_0,      &kp FR_N0,     LM2 LB2, BASE )
 
     ZMK_COMBO(nh_circ,   &kp RA(FR_C_CEDILLA),  RM1 RB1, BASE )
@@ -575,7 +576,7 @@ display-name= "NAVIGATION";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
 //             ┃   ctrl+A    ┃   ctrl+X    ┃   ctrl+C    ┃   ctrl+V    ┃ vim syst cli┃   ┃   Insert    ┃    Home     ┃    End      ┃             ┃             ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃           ┃ osm LGUI    ┃  osm LALT   ┃  osm LSHFT  ┃  osm LCTRL  ┃   ctrl+Z    ┃   ┃ Print Screen┃    Left     ┃    Down     ┃     Up      ┃    Right    ┃           ┃
+// ┃           ┃ osm LGUI    ┃  osm LALT   ┃  osm LSHFT  ┃  osm LCTRL  ┃   ctrl+Z    ┃   ┃ Print Screen┃    Left     ┃    Down     ┃     Up      ┃    Right    ┃  NumPad   ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
 // ┃  swap     ┃ vim last Y  ┃  alt+F4     ┃ alt+ctrl+gui┃  osm RALT   ┃   ctrl+Y    ┃   ┃   Pause     ┃   Page Up   ┃   Page Down ┃             ┃  Context Men┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -585,7 +586,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &kp LC(FR_A)  &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)  &vim_syst_clip    &kp INS       &kp HOME      &kp END        XXX           XXX
-    ___         &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(FR_Z)      &kp PSCRN     &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT      XXX
+    ___         &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp LC(FR_Z)      &kp PSCRN     &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     &kp KP_NUM
     &sl_togNavM &vim_last_yank &kp LA(F4)   &kp LA(LC(LGUI)) &sk RALT   &kp LC(FR_Y)      &kp PAUSE_BREAK &kp PG_UP   &kp PG_DN      XXX          &kp K_APP      &sl_togNavM
                                              ___           ___           ___               ___           ___           ___
         >;
@@ -656,76 +657,12 @@ bindings = <
                         >;
                 };
 
-mouse_layer {
-display-name= "MOUSE";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃  Mouse Btn4 ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃  Mouse Btn 5┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃             ┃             ┃             ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃   ___       ┃    ___      ┃     ___     ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-bindings = <
-
-// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
-
-                 XXX          &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)   XXX              &mkp MB4      &msc SCRL_UP  &mmv MOVE_UP  &msc SCRL_DOWN  XXX
-     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp ESC          &mkp MB5       &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT  XXX       ___
-     ___         XXX          &kp RALT      XXX           XXX           XXX                XXX          &msc SCRL_LEFT  XXX          &msc SCRL_RIGHT  XXX        ___
-                                            &kp DEL       &kp BSPC      &kp RET           &mkp LCLK     &mkp MCLK     &mkp RCLK
-                        >;
-                };
-
-mouse_tp_layer {
-display-name= "MOUSE_TP";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃             ┃ NegInert up ┃ speed up    ┃ sensitive up┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃             ┃ NegInert Dow┃ speed down  ┃ sensit. down┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃ scroll layer┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃             ┃             ┃  ms_log     ┃  ms_reset   ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-bindings = <
-
-// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
-
-                 XXX          &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)   XXX               XXX          XXX          U_MSS_TP_NI_I  U_MSS_TP_V6_I  U_MSS_TP_S_I
-     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp ESC            XXX         XXX          U_MSS_TP_NI_D  U_MSS_TP_V6_D  U_MSS_TP_S_D  ___
-     ___         XXX          &kp RALT      &mo MOUSE_SCR &mkp MB4      &mkp MB5           XXX          XXX          XXX            U_MSS_LOG      U_MSS_RESET   ___
-                                            &mkp LCLK     &mkp MCLK     &mkp RCLK         &mkp LCLK     &mkp MCLK     &mkp RCLK
-                        >;
-                };
-
-mouse_layer_scroll {
-display-name= "MOUSE_SCR";
-//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
-// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
-// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
-// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
-// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
-//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-bindings = <
-// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
-                 ___           ___           ___           ___           XXX               XXX         ___           ___           ___            XXX
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
-                                             ___           ___           ___               ___         ___           ___
-                        >;
-                };
-
 excel_layer {
 display-name= "EXCEL";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
 //             ┃    Left     ┃   Down      ┃     Up      ┃    Right    ┃     F2      ┃   ┃     /       ┃     7       ┃     8       ┃     9       ┃     -       ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃   Shift+G   ┃   ┃     0       ┃     4       ┃     5       ┃     6       ┃     +       ┃           ┃
+// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃   Shift+G   ┃   ┃     0       ┃     4       ┃     5       ┃     6       ┃     +       ┃  NumPad   ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
 // ┃  swap     ┃             ┃   Cut       ┃    Copy     ┃  osm RALT   ┃   Paste     ┃   ┃     *       ┃     1       ┃     2       ┃     3       ┃     .       ┃  swap     ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
@@ -736,7 +673,7 @@ bindings = <
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
                 &kp LEFT      &kp DOWN      &kp UP        &kp RIGHT     &kp F2            &kp KP_SLASH  &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_MINUS
-     ___        &skl LGUI     &sk LALT      &sk LSHFT     &sk LCTRL     &kp LS(G)         &kp KP_N0     &kp KP_N4     &kp KP_N5     &kp KP_N6     &kp KP_PLUS    ___
+     ___        &skl LGUI     &sk LALT      &sk LSHFT     &sknq LCTRL   &kp LS(G)         &kp KP_N0     &kp KP_N4     &kp KP_N5     &kp KP_N6     &kp KP_PLUS    &kp KP_NUM
      ___        XXX           &kp LC(FR_X)  &kp LC(FR_C)  &kp RALT      &kp LC(FR_V)      &kp KP_ASTERISK &kp KP_N1   &kp KP_N2     &kp KP_N3     &kp KP_DOT     ___
                                              ___           ___           ___               ___           ___           ___
                         >;
@@ -862,6 +799,7 @@ excel_temp_layer {
                                              ___           ___           ___               ___         ___           ___
         >;
     };
+
 excel_lock_layer {
     display-name= "EXCEL_LOCK";
     bindings = <
@@ -871,6 +809,67 @@ excel_lock_layer {
                                              ___           ___           ___               ___         ___           ___
         >;
     };
+
+mouse_layer {
+display-name= "MOUSE";
+//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃  Mouse Btn4 ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃  Mouse Btn 5┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
+// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
+// ┃  swap     ┃             ┃     RALT    ┃             ┃             ┃             ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                         ┃   ___       ┃    ___      ┃     ___     ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
+//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+bindings = <
+// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
+                 XXX          &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)   XXX              &mkp MB4      &msc SCRL_UP  &mmv MOVE_UP  &msc SCRL_DOWN  XXX
+     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp ESC          &mkp MB5       &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_RIGHT  XXX       ___
+     ___         XXX          &kp RALT      XXX           XXX           XXX                XXX          &msc SCRL_LEFT  XXX          &msc SCRL_RIGHT  XXX        ___
+                                            &kp DEL       &kp BSPC      &kp RET           &mkp LCLK     &mkp MCLK     &mkp RCLK
+                        >;
+                };
+
+mouse_tp_layer {
+display-name= "MOUSE_TP";
+//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃             ┃ NegInert up ┃ speed up    ┃ sensitive up┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃             ┃ NegInert Dow┃ speed down  ┃ sensit. down┃    /      ┃
+// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
+// ┃  swap     ┃             ┃     RALT    ┃ scroll layer┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃             ┃             ┃  ms_log     ┃  ms_reset   ┃  swap     ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
+//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+bindings = <
+// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
+                 XXX          &kp LC(FR_X)  &kp LC(FR_C)  &kp LC(FR_V)   XXX               XXX          XXX          U_MSS_TP_NI_I  U_MSS_TP_V6_I  U_MSS_TP_S_I
+     ___        &skl LGUI      &sk LALT      &sk LSHFT     &sk LCTRL     &kp ESC            XXX         XXX          U_MSS_TP_NI_D  U_MSS_TP_V6_D  U_MSS_TP_S_D  ___
+     ___         XXX          &kp RALT      &mo MOUSE_SCR &mkp MB4      &mkp MB5           XXX          XXX          XXX            U_MSS_LOG      U_MSS_RESET   ___
+                                            &mkp LCLK     &mkp MCLK     &mkp RCLK         &mkp LCLK     &mkp MCLK     &mkp RCLK
+                        >;
+                };
+
+mouse_layer_scroll {
+display-name= "MOUSE_SCR";
+//             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
+//             ┃             ┃    Cut      ┃    Copy     ┃    Paste    ┃             ┃   ┃             ┃  Wheel Up   ┃ Mouse Up    ┃  Wheel Down ┃             ┃
+// ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
+// ┃  LSHFT    ┃  osm LGUI   ┃  osm LALT   ┃  osm LSHIFT ┃   osm LCTRL ┃    ESC      ┃   ┃             ┃  Mouse Left ┃  Mouse Down ┃  Mouse Right┃             ┃    /      ┃
+// ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
+// ┃  swap     ┃             ┃     RALT    ┃             ┃ Mouse Btn 4 ┃ Mouse Btn 5 ┃   ┃             ┃ Wheel Left  ┃             ┃ Wheel Right ┃             ┃  swap     ┃
+// ┗━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━┛
+//                                         ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃   ┃ Mouse Btn L ┃ Mouse Btn M ┃ Mouse Btn R ┃
+//                                         ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛   ┗━━━━━━━━━━━━━┻━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+bindings = <
+// ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
+                 ___           ___           ___           ___           XXX               XXX         ___           ___           ___            XXX
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+     ___         ___           ___           ___           ___           ___               ___         ___           ___           ___           ___           ___
+                                             ___           ___           ___               ___         ___           ___
+                        >;
+                };
+
        };
 
 };
