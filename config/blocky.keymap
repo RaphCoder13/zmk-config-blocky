@@ -164,6 +164,17 @@
     };
 };
 
+/ {
+    behaviors {
+        mouse_reset: behavior_mouse_reset {
+            compatible = "zmk,behavior-mouse-reset";
+            label = "MOUSE_RESET";
+            #binding-cells = <0>;
+        };
+    };
+};
+
+
 &lt {
     quick-tap-ms = <200>;
 };
@@ -638,7 +649,7 @@ bindings = <
 app_layer {
 display-name= "APPS";
 //             ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓   ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━┓
-//             ┃  BT Sel 0   ┃ BT Sel 1    ┃ BT Sel 2    ┃ BT Sel 3    ┃ BT Clear    ┃   ┃   td_reset  ┃   Alt+L     ┃   Ctrl+²    ┃             ┃             ┃
+//             ┃  BT Sel 0   ┃ BT Sel 1    ┃ BT Sel 2    ┃ BT Sel 3    ┃ BT Clear    ┃   ┃   td_reset  ┃   Alt+L     ┃   Ctrl+²    ┃             ┃ mouse_reset ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┓
 // ┃ reset_boot┃   LGUI      ┃    LALT     ┃   LSHIFT    ┃   LCTRL     ┃             ┃   ┃ Context Menu┃   browser   ┃             ┃ Sh+Alt+Ctl+T┃             ┃    /      ┃
 // ┣━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━┫   ┣━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━━━╋━━━━━━━━━━━┫
@@ -650,7 +661,7 @@ bindings = <
 
 // ╷           ╷             ╷             ╷             ╷             ╷             ╷   ╷             ╷             ╷             ╷             ╷             ╷           ╷
 
-                &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR        &td_reset     &kp LA(L)     &kp LC(FR_SQUARE)  XXX       XXX
+                &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_CLR        &td_reset     &kp LA(L)     &kp LC(FR_SQUARE)  XXX       &mouse_reset
 &reset_bootloader &kp LGUI    &kp LALT      &kp LSHIFT    &kp LCTRL     XXX               &kp K_APP     &kp C_AC_HOME XXX          &kp LS(LA(LC(T)))  XXX           ___
      ___        &out OUT_USB  &out OUT_BLE  &ind_bat      &kp RALT      &ind_con          &kp LS(LA(LC(K))) &kp LC(LA(F)) &kp C_AL_CALC &kp LG(LS(S)) XXX           ___
                                              ___           ___           ___               ___           ___           ___
